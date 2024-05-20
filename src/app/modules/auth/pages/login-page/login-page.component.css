@@ -1,0 +1,27 @@
+.login-container {
+  height: 100vh;
+}
+.login-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 60%;
+}
+.login-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.login-btn {
+  background-color: #6e936a;
+  font-weight: bold;
+  color: white;
+}
+.login-btn:hover {
+  color:black;
+}
+.brand {
+  font-family: 'Cedarville Cursive', cursive;
+}
