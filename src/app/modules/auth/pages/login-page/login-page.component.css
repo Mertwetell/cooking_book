@@ -1,5 +1,6 @@
 .login-container {
   height: 100vh;
+  padding: 0;
 }
 .login-form {
   padding: 20px;
