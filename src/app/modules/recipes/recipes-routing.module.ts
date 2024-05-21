@@ -6,13 +6,16 @@ import { EditRecipesPageComponent } from './pages/edit-recipes-page/edit-recipes
 
 const routes: Routes = [
   {
-    path:'', component: RecipesPageComponent
+    path:'',
+    component: RecipesPageComponent
   },
   {
-    path:'new', component: NewRecipesPageComponent
+    path:'new',
+    component: NewRecipesPageComponent
   },
   {
-    path:'edit', component: EditRecipesPageComponent
+    path:'edit',
+    component: EditRecipesPageComponent
   }
 ];
 
@@ -21,6 +24,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class RecipesRoutingModule { 
-  
+export class RecipesRoutingModule {
+
 }

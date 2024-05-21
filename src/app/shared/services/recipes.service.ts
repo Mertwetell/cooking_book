@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { enviroment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs';
-import {catchError, map}from 'rxjs/operators'
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http';
 import { RecipeModel } from '@core/models/recipe.model';
 import { IngredientModel } from '@core/models/ingredient.model';
@@ -11,15 +11,15 @@ import { IngredientModel } from '@core/models/ingredient.model';
 })
 export class RecipesService {
 
-  private readonly url=enviroment.api;
+  private readonly url=environment.api;
 
   constructor(private httClient:HttpClient) { }
 
     getAllRecipes():Observable<any>{
-  
+
       return this.httClient.get(`${this.url}/recipes/get`)
     }
-  
+
     getAllIngredients():Observable<any>{
       return this.httClient.get(`${this.url}/recipes/get`).pipe(
        map((recipes:any)=>{
@@ -31,9 +31,9 @@ export class RecipesService {
        })
 
       );
-      
+
     }
-  
+
     addRecipe(recipe:RecipeModel):Observable<any>{
       return this.httClient.post(`${this.url}/recipes/add`,recipe)
     }

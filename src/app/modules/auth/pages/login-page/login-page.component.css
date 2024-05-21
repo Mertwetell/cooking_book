@@ -24,7 +24,7 @@
   color:black;
 }
 .brand {
-  font-family: 'Cedarville Cursive', cursive;
+  font-family: var(--font-family-2);
 }
 .error-session {
   color: red;
