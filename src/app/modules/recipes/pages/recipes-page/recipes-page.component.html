@@ -1,14 +1,16 @@
 <div class="container my-5 text-center">
   <div class="d-flex flex-wrap justify-content-center">
-    <div [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 18rem;">
-        <div class="card-body m-3">
-          <a><i class="bi bi-plus-circle icon-overlay"></i></a>
-          <p class="add-card-text">AGREGAR RECETA</p>
-        </div>
-    </div>
     <li *ngFor="let recipe of recipesList">
       <app-recipe-card [recipe]="recipe"></app-recipe-card>
     </li>
+    <div [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 18rem;">
+      <div class="card-body m-3">
+        <a routerLink="['/recipes/new']">
+          <i class="bi bi-plus-circle icon-overlay"></i>
+          <p class="add-card-text">AGREGAR RECETA</p>
+        </a>
+      </div>
+  </div>
   </div>
 </div>
 

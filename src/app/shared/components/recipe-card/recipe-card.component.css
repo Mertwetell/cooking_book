@@ -1,5 +1,5 @@
 .card {
-  box-shadow: 0 2px 15px var(--color-3);
+  box-shadow: 0 0px 15px var(--color-3);
   overflow: hidden;
   transition: transform 0.2s;
 }
