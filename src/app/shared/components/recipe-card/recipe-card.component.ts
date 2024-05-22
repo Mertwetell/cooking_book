@@ -10,12 +10,13 @@ export class RecipeCardComponent {
 
   @Input()
   recipe: RecipeModel = {
+    _id: '',
     name: '',
     description: '',
     imagePath: '',
-    ingredients: { name: '', amount: 0 }
+    ingredients: [{ name: '', amount: 0 }]
   };
-  
+
 }
 
 
