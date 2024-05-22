@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  width: 60%;
+  width: 65%;
 }
 .login-image {
   width: 100%;
@@ -16,13 +16,26 @@
   object-fit: cover;
 }
 .login-btn {
-  background-color: #6e936a;
-  font-weight: bold;
+  background-color: var(--color-3);
   color: white;
 }
 .login-btn:hover {
   color:black;
 }
 .brand {
-  font-family: 'Cedarville Cursive', cursive;
+  font-family: var(--font-family-2);
+}
+.error-session {
+  color: red;
+  font-size: var(--font-size-2);
+}
+.text-session {
+  font-size: var(--font-size-2);
+}
+.text-session a {
+  color: var(--color-3);
+}
+.password-session {
+  color: var(--color-3);
+  font-size: var(--font-size-2);
 }

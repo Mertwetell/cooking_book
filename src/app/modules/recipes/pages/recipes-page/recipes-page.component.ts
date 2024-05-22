@@ -16,20 +16,20 @@ export class RecipesPageComponent implements OnInit {
   //--------------------------
   constructor(private recipeServices:RecipesService , private router: Router )
   {
-   
+
   }
   ngOnInit(): void {
     console.log("inicio recipes ");
     this.getRecipes();
-    
+
   }
-  
+
   //--------------
   getRecipes(){
 
     this.recipeServices.getAllRecipes().subscribe(
     (response:RecipeModel[])=>{
-        
+
         this.recipesList=response;
         console.log("obreniendo recipes ",response);
       },
@@ -44,7 +44,7 @@ export class RecipesPageComponent implements OnInit {
 
     this.recipeServices.deleteRecipe(id).subscribe(
       (response:any)=>{
-        
+
         console.log("se borror correctamente el listado ", response);
         this.getRecipes();
       },

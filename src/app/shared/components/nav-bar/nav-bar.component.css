@@ -1,0 +1,9 @@
+.navbar-brand {
+  font-family: var(--font-family-2);
+  font-size: var(--font-size-3);
+}
+.router-link-active
+{
+  color: var(--color-3);
+  font-weight: 900;
+}

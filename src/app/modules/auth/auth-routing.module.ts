@@ -8,6 +8,10 @@ const routes: Routes = [
     component: LoginPageComponent
   },
   {
+    path: 'signup',
+    component: LoginPageComponent
+  },
+  {
     path: '**',
     redirectTo: '/auth/login'
   }
