@@ -12,7 +12,12 @@ const routes: Routes = [
     path:'new', component: NewRecipesPageComponent
   },
   {
-    path:'edit', component: EditRecipesPageComponent
+    path:'edit/:id', component: EditRecipesPageComponent
+  },
+  {
+    path:'**',
+    redirectTo:''
+
   }
 ];
 

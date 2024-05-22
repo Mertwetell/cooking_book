@@ -19,13 +19,26 @@ export class RecipesService {
   
       return this.httClient.get(`${this.url}/recipes/get`)
     }
+
+    getRecipe(id:string):Observable<any>{
+  
+      return this.httClient.get(`${this.url}/recipes/get?key=${id}`).pipe(
+        map((recipes:any)=>{
+          return recipes[0];
+
+        })
+      );
+    }
   
     getAllIngredients():Observable<any>{
       return this.httClient.get(`${this.url}/recipes/get`).pipe(
        map((recipes:any)=>{
-        let ingredient: Array<IngredientModel>=[];
-          recipes.array.each((element:any) => {
-            ingredient.push(element.ingredients);
+        let ingredient:any=[];
+          recipes.forEach((element:any) => {
+            if(element.ingredients.length==0){
+              ingredient=[...ingredient, ...element.ingredients];
+            }
+           
           });
         return ingredient;
        })
