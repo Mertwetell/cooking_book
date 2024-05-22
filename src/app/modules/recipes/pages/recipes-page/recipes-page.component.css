@@ -1,0 +1,29 @@
+.card-add-recipes {
+  height: 50vh;
+}
+.icon-overlay {
+  transform: translate(-50%, -50%);
+  font-size: 9rem;
+  text-shadow: 0px 0px 10px rgba(75, 141, 60, 0.7);
+}
+.equal-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(240, 255, 255, 0.489);
+}
+.bi-plus-circle {
+  color: white;
+}
+.add-card-text {
+  color: var(--color-2);
+  font-weight: 900;
+}
+.card {
+  box-shadow: 0 2px 15px var(--color-3);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.02);
+}

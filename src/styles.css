@@ -28,3 +28,9 @@ button {
 button:disabled {
     opacity: .5;
 }
+
+.button {
+  background-color: var(--color-3);
+  font-weight: bold;
+  color: white;
+}
