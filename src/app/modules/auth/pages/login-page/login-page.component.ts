@@ -30,11 +30,11 @@ export class LoginPageComponent implements OnInit {
 
       this.formLogin = new FormGroup (
         {
-          email: new FormControl('', [
+          email: new FormControl('febo6@febo.com', [
             Validators.required,
             Validators.email
           ]),
-          password: new FormControl('',
+          password: new FormControl('123456',
             [
               Validators.required,
               Validators.minLength(6),
@@ -50,8 +50,8 @@ export class LoginPageComponent implements OnInit {
     if (this.formType == 1) {
       this.authService.sendCredentials(email, password)
       .subscribe(responseOk => {
-        const { tokenSession, data } = responseOk
-        this.cookie.set('token', tokenSession, 4, '/')
+        const { idToken, expiresIn  } = responseOk
+        this.cookie.set('token', idToken, 4, '/')
         this.router.navigate(['/', 'recipes'])
       },
         err => {
@@ -60,9 +60,9 @@ export class LoginPageComponent implements OnInit {
     } else {
       this.authService.registerCredentials(email, password)
       .subscribe(responseOk => {
-        const { tokenSession } = responseOk
+        const { idToken, expiresIn  } = responseOk
 
-        this.cookie.set('token', tokenSession, 4, '/')
+        this.cookie.set('token', idToken, 4, '/')
         this.router.navigate(['/', 'recipes'])
       },
         err => {

@@ -14,7 +14,7 @@ export class RecipeCardComponent {
     name: '',
     description: '',
     imagePath: '',
-    ingredients: [{ name: '', amount: 0 }]
+    ingredients: [{ name: '', amount: 0 ,edit:false, delete:false}]
   };
 
 }

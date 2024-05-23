@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class AuthService {
   private readonly URL = environment.api
-  constructor(private http: HttpClient) { }
+  constructor(private cookieService: CookieService,private http: HttpClient) { }
 
   sendCredentials(email: string, password: string): Observable<any> {
     try {
@@ -34,5 +35,9 @@ export class AuthService {
     } catch (err) {
         return of([])
     }
+  }
+
+  logOut(){
+    this.cookieService.set('token', "", 0, '/');
   }
 }

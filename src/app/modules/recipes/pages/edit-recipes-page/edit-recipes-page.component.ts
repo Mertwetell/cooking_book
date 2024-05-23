@@ -11,7 +11,8 @@ import { RecipesService } from '@shared/services/recipes.service';
 export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
-  currentRecipe!:RecipeModel;
+  currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
+  isEdit:boolean=false; 
 
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
   {
@@ -22,7 +23,22 @@ export class EditRecipesPageComponent implements OnInit {
     this.idRecipe=this.route.snapshot.params["id"];
     this.getRecipe();
   }
-  
+  //-----------
+  addnewRowIngredient(){
+    if(this.currentRecipe.ingredients.length>0){
+      const listTmp=this.currentRecipe.ingredients.filter(a=>a.name.length==0);
+      if(listTmp.length>0){
+        return;
+       }
+    }
+    this.currentRecipe.ingredients.push({name:"",amount:0,edit:true,delete:false });
+  }
+
+  editRowIngredient(){
+  }
+
+  deleteRowIngredient(){
+  }
   //--------------
   getRecipe(){
 

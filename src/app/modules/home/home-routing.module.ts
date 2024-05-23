@@ -10,12 +10,12 @@ const routes: Routes = [
   {
     path:'ingredients',
     loadChildren:()=> import( '@modules/ingredient/ingredient.module').then(m=>m.IngredientModule)
-  },
+  }/*,
   {
     path:'**',
     redirectTo:'/recipes'
 
-  }];
+  }*/];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

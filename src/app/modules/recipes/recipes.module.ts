@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { NewRecipesPageComponent } from './pages/new-recipes-page/new-recipes-page.component';
 import { EditRecipesPageComponent } from './pages/edit-recipes-page/edit-recipes-page.component';
-import { SharedModule } from '@shared/shared.module';
+
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     RecipesRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
+    
   ]
 })
 export class RecipesModule { }

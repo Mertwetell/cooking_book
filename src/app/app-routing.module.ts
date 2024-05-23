@@ -14,6 +14,9 @@ const routes: Routes =
     component:HomePageComponent,
     loadChildren:()=>import(`./modules/home/home.module`).then(m=>m.HomeModule), 
     canActivate:[SessionGuard]
+  },
+  {
+    path:"**", redirectTo:"auth"
   }
 ];
 
