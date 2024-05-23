@@ -1,6 +1,6 @@
 <h3>{{currentRecipe.name}}</h3>
 <div class="container-fluid">
-    
+
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" (click)="isEdit=!isEdit" >
         <label class="form-check-label" for="flexSwitchCheckDefault">Editar</label>
@@ -8,7 +8,7 @@
     <!--[checked]="isEdit"-->
    <hr/>
     <div class="align-items-center justify-content-center" style="width: 50%;" >
-        
+
         <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
             <fieldset [disabled]="!isEdit">
               <div class="mb-3">
@@ -28,7 +28,7 @@
                 <label for="description" class="form-label">Descripcion</label>
                 <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
               </div>
-              
+
               <div class="mb-3">
                 <table class="table table-dark">
                     <thead>
@@ -41,20 +41,20 @@
                     </thead>
                     <tbody *ngIf="currentRecipe.ingredients">
                       <tr *ngFor="let ingr of currentRecipe.ingredients;index as ind" [ngClass]="{'row_delete':ingr.delete}">
-                        
+
                         <th scope="row">{{ind+1}}</th>
                         <td>
                             <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
                                 <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control" placeholder="" maxlength="50" required >
-                            </ng-template> 
+                            </ng-template>
                             <ng-template [ngIf]="ingr.edit!=true || ingr.delete==true">
                                 {{ingr.name}}
                             </ng-template>
                         </td>
-                        <td> 
+                        <td>
                             <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
                                 <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control" placeholder="" max="99" min="1" required >
-                            </ng-template> 
+                            </ng-template>
                             <ng-template [ngIf]="ingr.edit!=true">
                                 {{ingr.amount}}
                             </ng-template>
@@ -62,9 +62,9 @@
                         <td><button type="button" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="uil uil-pen"></i></button>
                             <button type="button" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'uil uil-trash':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
                         </td>
-                        
+
                       </tr>
-                     
+
                     </tbody>
                   </table>
               </div>
@@ -78,6 +78,6 @@
         </form>
 
     </div>
-    
+
 </div>
 

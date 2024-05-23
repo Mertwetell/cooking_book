@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
 import { RecipesService } from '@shared/services/recipes.service';
@@ -12,17 +12,18 @@ export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
-  isEdit:boolean=false; 
+  isEdit:boolean=false;
 
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
   {
-    
+
   }
 
   ngOnInit(): void {
     this.idRecipe=this.route.snapshot.params["id"];
     this.getRecipe();
   }
+
   //-----------
   addnewRowIngredient(){
     if(this.currentRecipe.ingredients.length>0){
@@ -67,7 +68,7 @@ export class EditRecipesPageComponent implements OnInit {
 
     this.recipeServices.editRecipe(this.idRecipe, newDataRecipe).subscribe(
       (response:any)=>{
-        
+
         console.log("obreniendo recipe ",response);
       },
       error=>{

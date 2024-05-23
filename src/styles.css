@@ -2,6 +2,7 @@
   --color-1: #181818;
   --color-2: #FFFFFF;
   --color-3: #6e936a;
+  --color-4: #879784;
   --font-size-1: 1.1rem;
   --font-size-2: 0.9rem;
   --font-size-3: 2rem;
@@ -33,4 +34,13 @@ button:disabled {
   background-color: var(--color-3);
   font-weight: bold;
   color: white;
+}
+
+li
+{
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
