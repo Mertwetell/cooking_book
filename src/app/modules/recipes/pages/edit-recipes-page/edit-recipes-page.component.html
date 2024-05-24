@@ -1,31 +1,31 @@
-<div class="d-flex justify-content-evenly">
-  <div class="d-flex flex-column justify-content-evenly" style="width: 40%">
-    <h3 class="text-center">{{currentRecipe.name}}</h3>
+<div class="edit-container d-flex justify-content-evenly">
+  <div class="d-flex flex-column edit-container-right justify-content-start" style="width: 40%">
+    <h3 class="text-center recipe-name">{{currentRecipe.name}}</h3>
     <img [src]="currentRecipe.imagePath" class="rounded recipe-img" alt="recipe-img">
   </div>
-  <div style="width: 40%">
+  <div style="width: 40%" class="edit-container-left">
     <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
         <div class="mb-3">
               <div class="d-flex justify-content-between mb-3">
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" (click)="isEdit=!isEdit" >
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="isEdit" (change)="toggleEdit($event)">
                   <label class="form-check-label" for="flexSwitchCheckDefault">Editar</label>
                 </div>
-                  <!--[checked]="isEdit"-->
-                <button type="submit" [disabled]="(recipForm.invalid || recipForm.untouched || !isEdit)" class="btn login-btn button">Guardar</button>
+
+                <button type="submit" [disabled]="(recipForm.invalid || !isEdit)" class="btn login-btn button">Guardar</button>
               </div>
         </div>
         <fieldset [disabled]="!isEdit">
           <app-recipe-inputs [recipe]="currentRecipe"></app-recipe-inputs>
           <label for="description" class="form-label">Ingredientes:</label>
           <div class="mb-3">
-            <table class="table table-dark">
+            <table class="table table-dark text-center">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col"><button type="button" (click)="addnewRowIngredient()"><i class="uil uil-plus"></i></button> </th>
+                    <th scope="col"><button (click)="addnewRowIngredient()" class="btn button button-plus"><i class="bi bi-plus"></i></button> </th>
                   </tr>
                 </thead>
                 <tbody *ngIf="currentRecipe.ingredients">
@@ -48,8 +48,8 @@
                             {{ingr.amount}}
                         </ng-template>
                     </td>
-                    <td><button type="button" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="uil uil-pen"></i></button>
-                        <button type="button" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'uil uil-trash':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
+                    <td><button class="btn button button-edit me-2" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="bi bi-pencil"></i></button>
+                        <button class="btn button button-delete" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'bi bi-trash3':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
                     </td>
                   </tr>
                 </tbody>

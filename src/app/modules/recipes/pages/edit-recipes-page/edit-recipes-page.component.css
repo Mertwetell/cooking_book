@@ -6,3 +6,39 @@ h3 {
   text-decoration: underline;
   color: var(--color-3);
 }
+.button:hover {
+  background-color: white;
+  color: black;
+}
+.button-delete {
+  background-color: rgb(147, 65, 65);
+}
+.button-delete:hover {
+  background-color: rgb(190, 86, 86);
+  color: white;
+}
+.button-plus:hover {
+  background-color: #85b080;
+  color: white;
+
+}
+.button-edit {
+  background-color: rgb(223, 216, 216);
+  color: black;
+}
+.recipe-name {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 925px) {
+  .edit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+  }
+  .edit-container-right, .edit-container-left {
+    width: 85% !important;
+  }
+}
+

@@ -12,7 +12,7 @@ export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
-  isEdit:boolean=true;
+  isEdit:boolean=false;
 
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
   {
@@ -21,7 +21,14 @@ export class EditRecipesPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.idRecipe=this.route.snapshot.params["id"];
+    this.isEdit=this.route.snapshot.queryParams['isEdit'];
+
     this.getRecipe();
+  }
+
+  toggleEdit(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.isEdit = inputElement.checked;
   }
 
   //-----------
