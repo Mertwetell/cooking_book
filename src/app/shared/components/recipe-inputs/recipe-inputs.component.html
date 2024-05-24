@@ -1,0 +1,12 @@
+<div class="mb-3">
+  <label for="name" class="form-label">Nombre:</label>
+  <textarea type="text" name="name" class="form-control" [(ngModel)]="recipe.name" placeholder="" required maxlength="100"></textarea>
+</div>
+<div class="mb-3">
+  <label for="description" class="form-label">Descripción:</label>
+  <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="recipe.description" required maxlength="500"></textarea>
+</div>
+<div class="mb-3">
+  <label for="imagePath" class="form-label">Imagen:</label>
+  <textarea type="text" name="imagePath" [(ngModel)]="recipe.imagePath" class="form-control" placeholder="" maxlength="500"></textarea>
+</div>

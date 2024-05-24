@@ -1,19 +1,17 @@
 <nav class="navbar bg-dark border-bottom border-body navbar-expand-lg" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand me-4 ms-1" [routerLink]="['/recipes']" >My Cookbook</a>
+    <a class="navbar-brand me-4 ms-1" [routerLink]="['/recipes']">My Cookbook</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav me-auto">
         <a class="nav-link mx-4" [routerLink]="['/recipes']" routerLinkActive="router-link-active">Recetas</a>
         <a class="nav-link mx-4" [routerLink]="['/ingredients']" routerLinkActive="router-link-active">Ingredientes</a>
       </div>
-      
-    </div>
-    <div>
-      
-      <a class="nav-link mx-4 logaut" (click)="logout()"><i class="uil uil-user"></i> Cerrar Sesión</a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link mx-4 logout" (click)="logout()"><i class="uil uil-user"></i> Cerrar Sesión</a>
+      </div>
     </div>
   </div>
 </nav>

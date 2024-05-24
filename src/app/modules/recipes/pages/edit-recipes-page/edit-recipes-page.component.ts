@@ -12,7 +12,7 @@ export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
-  isEdit:boolean=false;
+  isEdit:boolean=true;
 
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
   {

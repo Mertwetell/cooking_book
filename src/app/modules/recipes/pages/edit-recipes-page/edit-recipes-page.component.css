@@ -1,5 +1,8 @@
 .row_delete{
     text-decoration: line-through;
     color: red;
-
+}
+h3 {
+  text-decoration: underline;
+  color: var(--color-3);
 }

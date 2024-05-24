@@ -3,21 +3,27 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
+import { RecipeInputsComponent } from './components/recipe-inputs/recipe-inputs.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     NavBarComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    RecipeInputsComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavBarComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    RecipeInputsComponent
   ]
 })
 export class SharedModule { }

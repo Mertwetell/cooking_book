@@ -1,1 +1,11 @@
-<p>new-recipes-page works!</p>
+<div class="container" style="width: 50%">
+  <form (ngSubmit)="addRecipe()">
+    <app-recipe-inputs [recipe]="newRecipe"></app-recipe-inputs>
+    <label for="description" class="form-label">Ingredientes:</label>
+    <!-- aca iria la tabla de ingredientes -->
+    <button type="submit" [disabled]="(formNewRecipe.invalid)" class="btn login-btn button">Guardar</button>
+  </form>
+</div>
+<div>
+  {{newRecipe | json}}
+</div>
