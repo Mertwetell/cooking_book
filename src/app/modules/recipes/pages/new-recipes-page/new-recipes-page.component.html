@@ -1,1 +1,83 @@
-<p>new-recipes-page works!</p>
+<h3>Nueva Receta</h3>
+<div class="container-fluid">
+
+    
+    <!--[checked]="isEdit"-->
+   <hr/>
+    <div class="align-items-center justify-content-center" style="width: 50%;" >
+
+        <form (ngSubmit)="addIngredient()" #recipForm="ngForm" >
+            <!--<fieldset [disabled]="!isEdit">-->
+              <div class="mb-3">
+                <div class="text-left">
+                    <img [src]="currentRecipe.imagePath" class="rounded" style="width: 200px;height:200px;" alt="...">
+                  </div>
+              </div>
+              <div class="mb-3">
+                    <label for="imagePath" class="form-label">Imagen</label>
+                    <input type="text" name="imagePath" [(ngModel)]="currentRecipe.imagePath" class="form-control" placeholder="" maxlength="500">
+              </div>
+              <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" name="name" class="form-control" [(ngModel)]="currentRecipe.name" placeholder="" required maxlength="100">
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Descripcion</label>
+                <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
+              </div>
+              <div class="mb-3">
+                <app-ingredient-table [ingredients]="currentRecipe.ingredients" [invalid]="recipForm.invalid" ></app-ingredient-table>
+              </div>
+             <!-- <div class="mb-3">
+                <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col"><button type="button" (click)="addnewRowIngredient()"><i class="uil uil-plus"></i></button> </th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="currentRecipe.ingredients">
+                      <tr *ngFor="let ingr of currentRecipe.ingredients;index as ind" [ngClass]="{'row_delete':ingr.delete}">
+
+                        <th scope="row">{{ind+1}}</th>
+                        <td>
+                            <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
+                                <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control" placeholder="" maxlength="50" required >
+                            </ng-template>
+                            <ng-template [ngIf]="ingr.edit!=true || ingr.delete==true">
+                                {{ingr.name}}
+                            </ng-template>
+                        </td>
+                        <td>
+                            <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
+                                <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control" placeholder="" max="99" min="1" required >
+                            </ng-template>
+                            <ng-template [ngIf]="ingr.edit!=true">
+                                {{ingr.amount}}
+                            </ng-template>
+                        </td>
+                        <td><button type="button" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="uil uil-pen"></i></button>
+                            <button type="button" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'uil uil-trash':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+              </div>-->
+
+              <button type="submit" [disabled]="(recipForm.invalid || recipForm.untouched)" class="btn login-btn button  mt-3">Guardar</button>
+           <!-- </fieldset>-->
+            <div>
+              {{recipForm.invalid || recipForm.untouched}}
+            </div>
+            <div>{{currentRecipe|json}}</div>
+        </form>
+
+    </div>
+
+</div>
+
+

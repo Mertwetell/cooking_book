@@ -9,6 +9,7 @@ import { RecipesService } from '@shared/services/recipes.service';
 })
 export class NewRecipesPageComponent {
 
+  currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
 
   constructor(private recipeServices:RecipesService)
   {
