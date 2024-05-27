@@ -1,0 +1,11 @@
+<h3 class="text-center">LISTA DE FAVORITOS</h3>
+<div *ngIf="favoritesRecipes.length == 0" class="my-5 text-center">
+  <p>La lista se encuentra vacía</p>
+</div>
+<div class="container px-0 my-5 text-center d-flex flex-column align-items-center">
+  <div class="d-flex flex-wrap justify-content-center">
+    <li *ngFor="let recipe of favoritesRecipes">
+      <app-recipe-card [recipe]="recipe"></app-recipe-card>
+    </li>
+  </div>
+</div>

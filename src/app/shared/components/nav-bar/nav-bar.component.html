@@ -6,8 +6,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav me-auto">
-        <a class="nav-link mx-4" [routerLink]="['/recipes']" routerLinkActive="router-link-active">Recetas</a>
+        <a class="nav-link mx-4" [routerLink]="['/recipes']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{ exact: true }">Recetas</a>
         <a class="nav-link mx-4" [routerLink]="['/ingredients']" routerLinkActive="router-link-active">Ingredientes</a>
+        <a class="nav-link mx-4" [routerLink]="['/recipes/favorites']" routerLinkActive="router-link-active">Favoritos</a>
       </div>
       <div class="navbar-nav ms-auto">
         <a class="nav-link mx-4 logout" (click)="logout()"><i class="uil uil-user"></i> Cerrar Sesión</a>

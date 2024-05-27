@@ -7,6 +7,7 @@ import { RecipesRoutingModule } from './recipes-routing.module';
 import { RecipesPageComponent } from './pages/recipes-page/recipes-page.component';
 import { NewRecipesPageComponent } from './pages/new-recipes-page/new-recipes-page.component';
 import { EditRecipesPageComponent } from './pages/edit-recipes-page/edit-recipes-page.component';
+import { FavoritesRecipesPageComponent } from './pages/favorites-recipes-page/favorites-recipes-page.component';
 
 
 
@@ -14,7 +15,8 @@ import { EditRecipesPageComponent } from './pages/edit-recipes-page/edit-recipes
   declarations: [
     RecipesPageComponent,
     NewRecipesPageComponent,
-    EditRecipesPageComponent
+    EditRecipesPageComponent,
+    FavoritesRecipesPageComponent
   ],
   imports: [
     CommonModule,

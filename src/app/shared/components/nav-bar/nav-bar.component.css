@@ -12,3 +12,8 @@
   cursor: pointer;
   color: white;
 }
+
+.recipes-link:focus {
+  color: var(--color-3);
+  font-weight: bold;
+}

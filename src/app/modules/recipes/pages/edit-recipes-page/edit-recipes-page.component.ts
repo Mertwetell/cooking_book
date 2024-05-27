@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
 import { RecipesService } from '@shared/services/recipes.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class EditRecipesPageComponent implements OnInit {
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
   isEdit:boolean=false;
-  
+
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService, private router: Router)
   {
 
@@ -64,6 +65,14 @@ export class EditRecipesPageComponent implements OnInit {
 
   }
 
+  // async getRecipes() {
+  //   try {
+  //     this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
+  //   } catch (error) {
+  //     console.error('Error obteniendo recetas:', error);
+  //   }
+  // }
+
   saveRecipe(){
 
     // let newDataRecipe:RecipeModel= {
@@ -74,17 +83,30 @@ export class EditRecipesPageComponent implements OnInit {
     //   ingredients:[]
     // };
 
-    this.recipeServices.editRecipe(this.idRecipe, this.currentRecipe).subscribe(
-      (response:any)=>{
-        console.log("recipe", this.currentRecipe)
-        console.log("obreniendo recipe ",response);
-        this.router.navigate(['/', 'recipes']);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
-
+    Swal.fire({
+      title: "¿Desea guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      denyButtonText: `No guardar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.recipeServices.editRecipe(this.idRecipe, this.currentRecipe).subscribe(
+          (response:any)=>{
+            console.log("obteniendo recipe ",response);
+          },
+          error=>{
+            console.log("Ocurrio un error al obtener recetas ", error);
+          }
+        );
+        Swal.fire("Guardado!", "", "success");
+        //this.router.navigate(['/', 'recipes']);
+      } else if (result.isDenied) {
+        Swal.fire("Los cambios no han sido guardados", "", "info");
       }
-    );
+    });
+
 
   }
 

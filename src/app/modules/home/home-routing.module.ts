@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path:'ingredients',
     loadChildren:()=> import( '@modules/ingredient/ingredient.module').then(m=>m.IngredientModule)
-  }/*,
+  },
+  /*,
   {
     path:'**',
     redirectTo:'/recipes'

@@ -1,5 +1,16 @@
   <div class="card m-3" style="width: 18rem;">
-    <img src="{{recipe.imagePath}}" class="card-img-top" alt="Recipe Image">
+    <div class="position-relative">
+      <a href="javascript:void(0)"
+        (click)="sendToFavorites()"
+        class="icon-overlay"
+        (mouseenter)="toggleIcon('filled')"
+        (mouseleave)="toggleIcon('normal')"
+        (mousedown)="toggleIcon('clicked')"
+        (mouseup)="toggleIcon('filled')">
+        <i [ngClass]="heartIconClass"></i>
+      </a>
+      <img src="{{recipe.imagePath}}" class="card-img-top" alt="Recipe Image" >
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{recipe.name}}</h5>
       <p class="card-text">{{recipe.description}}</p>
