@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
 
@@ -11,33 +11,33 @@ import { RecipesService } from '@shared/services/recipes.service';
 })
 export class RecipesPageComponent implements OnInit {
 
-   recipesList:RecipeModel[]=[];
+  recipesList:RecipeModel[]=[];
+  filteredRecipes: any[] = [];
+  searchTerm: string = '';
+  inputWidth: string = '18rem';
 
   //--------------------------
   constructor(private recipeServices:RecipesService , private router: Router )
   {
 
   }
-  ngOnInit(): void {
-    console.log("inicio recipes ");
-    this.getRecipes();
-
+  async ngOnInit() {
+    await this.getRecipes();
+    this.filteredRecipes = this.recipesList;
   }
 
-  //--------------
-  getRecipes(){
-
-    this.recipeServices.getAllRecipes().subscribe(
-    (response:RecipeModel[])=>{
-
-        this.recipesList=response;
-        console.log("obreniendo recipes ",response);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
-      }
+  filterRecipes() {
+    this.filteredRecipes = this.recipesList.filter(recipe =>
+      recipe.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
+  }
 
+  async getRecipes() {
+    try {
+      this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
+    } catch (error) {
+      console.error('Error obteniendo recetas:', error);
+    }
   }
 
   deleteRecipes(id:string){
