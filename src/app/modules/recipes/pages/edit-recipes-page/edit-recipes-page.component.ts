@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
 import { RecipesService } from '@shared/services/recipes.service';
+
 
 @Component({
   selector: 'app-edit-recipes-page',
@@ -13,8 +14,8 @@ export class EditRecipesPageComponent implements OnInit {
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
   isEdit:boolean=false;
-
-  constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
+  
+  constructor(private route:ActivatedRoute,private recipeServices:RecipesService, private router: Router)
   {
 
   }
@@ -65,21 +66,23 @@ export class EditRecipesPageComponent implements OnInit {
 
   saveRecipe(){
 
-    let newDataRecipe:RecipeModel= {
-      _id:"",
-      name: "",
-      description: "",
-      imagePath: "",
-      ingredients:[]
-    };
+    // let newDataRecipe:RecipeModel= {
+    //   // _id:"",
+    //   name: "",
+    //   description: "",
+    //   imagePath: "",
+    //   ingredients:[]
+    // };
 
-    this.recipeServices.editRecipe(this.idRecipe, newDataRecipe).subscribe(
+    this.recipeServices.editRecipe(this.idRecipe, this.currentRecipe).subscribe(
       (response:any)=>{
-
+        console.log("recipe", this.currentRecipe)
         console.log("obreniendo recipe ",response);
+        this.router.navigate(['/', 'recipes']);
       },
       error=>{
         console.log("Ocurrio un error al obtener recetas ", error);
+
       }
     );
 

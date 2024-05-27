@@ -34,12 +34,12 @@ export class RecipesService {
     getAllIngredients():Observable<any>{
       return this.httClient.get(`${this.url}/recipes/get`).pipe(
        map((recipes:any)=>{
-       
+
         const ingredient:Array<any>=[];
         for (let i = 0; i < recipes.length; i++) {
           //console.log("mojon ingrediente", recipes[i].ingredients.length);
           for (let j = 0; j < recipes[i].ingredients.length; j++) {
-            
+
             const pos = ingredient.map((e:any) => e.name).indexOf(recipes[i].ingredients[j].name);
             //console.log(pos);
             if(pos>-1){
@@ -49,8 +49,8 @@ export class RecipesService {
             }
           }
 
-        } 
-        
+        }
+
         return ingredient;
        })
 
@@ -65,11 +65,11 @@ export class RecipesService {
     }
 
     editRecipe(id:string, recipe:RecipeModel):Observable<any>{
-      return this.httClient.put(`${this.url}/recipes/edit?key=${id}`,recipe)
+      return this.httClient.put(`${this.url}/recipes/edit/${id}`,recipe)
     }
 
     deleteRecipe(id:string):Observable<any>{
-      return this.httClient.delete(`${this.url}/recipes/delete?key=${id}`)
+      return this.httClient.delete(`${this.url}/recipes/delete/${id}`)
     }
 
 }

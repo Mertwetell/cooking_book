@@ -39,3 +39,9 @@
   color: var(--color-3);
   font-size: var(--font-size-2);
 }
+
+@media (max-width: 450px) {
+  .login-image {
+    display: none;
+  }
+}

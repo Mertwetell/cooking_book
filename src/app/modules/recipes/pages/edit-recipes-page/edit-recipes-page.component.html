@@ -1,9 +1,9 @@
 <div class="edit-container d-flex justify-content-evenly">
-  <div class="d-flex flex-column edit-container-right justify-content-start" style="width: 40%">
+  <div class="d-flex flex-column edit-container-right justify-content-start">
     <h3 class="text-center recipe-name">{{currentRecipe.name}}</h3>
     <img [src]="currentRecipe.imagePath" class="rounded recipe-img" alt="recipe-img">
   </div>
-  <div style="width: 40%" class="edit-container-left">
+  <div class="edit-container-left">
     <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
         <div class="mb-3">
               <div class="d-flex justify-content-between mb-3">
@@ -59,7 +59,7 @@
         <!--<div>{{recipForm.untouched}}</div>
         <div>{{recipForm.invalid}}</div>
         <div>{{recipForm.invalid || recipForm.touched}}</div>-->
-        <!-- <div>{{currentRecipe|json}}</div> -->
+        <div>{{currentRecipe|json}}</div>
     </form>
   </div>
 </div>
