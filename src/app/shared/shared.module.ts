@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
-import { IngredientTableComponent } from './components/ingredient-edit-table/ingredient-edit-table.component';
-import { FormsModule } from '@angular/forms';
+import { RecipeInputsComponent } from './components/recipe-inputs/recipe-inputs.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,17 +12,18 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     NavBarComponent,
     RecipeCardComponent,
-    IngredientTableComponent
+    RecipeInputsComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavBarComponent,
     RecipeCardComponent,
-    IngredientTableComponent
+    RecipeInputsComponent
   ]
 })
 export class SharedModule { }

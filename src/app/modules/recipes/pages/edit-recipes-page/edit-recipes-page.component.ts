@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
+import { RecipeViewModel } from '@core/models/recipe.view.model';
 import { RecipesService } from '@shared/services/recipes.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-edit-recipes-page',
@@ -12,29 +15,42 @@ export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
-  isEdit:boolean=false;
+  isEdit:boolean=true;
+//--------------
+ recipeContex:RecipeViewModel=new RecipeViewModel();
 
-  constructor(private route:ActivatedRoute,private recipeServices:RecipesService)
-  {
-
-  }
+  constructor(private route:ActivatedRoute,private recipeServices:RecipesService, private router: Router)
+  { }
 
   ngOnInit(): void {
     this.idRecipe=this.route.snapshot.params["id"];
+    if(this.route.snapshot.queryParams['isEdit']!=undefined)
+      this.isEdit=this.route.snapshot.queryParams['isEdit'];
+
     this.getRecipe();
   }
 
+  toggleEdit(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.isEdit = inputElement.checked;
+  }
+
   //-----------
-  addnewRowIngredient(){
+  /*addnewRowIngredient(){
     if(this.currentRecipe.ingredients.length>0){
       const listTmp=this.currentRecipe.ingredients.filter(a=>a.name.length==0);
       if(listTmp.length>0){
         return;
        }
     }
-    this.currentRecipe.ingredients.push({name:"",amount:0,edit:true,delete:false });
+    this.currentRecipe.ingredients.push({_id:"" ,name:"",amount:0,edit:true,delete:false });
   }
- 
+
+  editRowIngredient(){
+  }
+
+  deleteRowIngredient(){
+  }*/
   //--------------
   getRecipe(){
 
@@ -42,6 +58,8 @@ export class EditRecipesPageComponent implements OnInit {
       (response:RecipeModel)=>{
 
         this.currentRecipe=response;
+        this.recipeContex.currentRecipe(this.currentRecipe);
+
         console.log("obreniendo recipe ",response);
       },
       error=>{
@@ -51,25 +69,48 @@ export class EditRecipesPageComponent implements OnInit {
 
   }
 
+  // async getRecipes() {
+  //   try {
+  //     this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
+  //   } catch (error) {
+  //     console.error('Error obteniendo recetas:', error);
+  //   }
+  // }
+
   saveRecipe(){
+    this.currentRecipe=this.recipeContex.getRecipeModel();
+    // let newDataRecipe:RecipeModel= {
+    //   // _id:"",
+    //   name: "",
+    //   description: "",
+    //   imagePath: "",
+    //   ingredients:[]
+    // };
 
-    let newDataRecipe:RecipeModel= {
-      _id:"",
-      name: "",
-      description: "",
-      imagePath: "",
-      ingredients:[]
-    };
-
-    this.recipeServices.editRecipe(this.idRecipe, newDataRecipe).subscribe(
-      (response:any)=>{
-
-        console.log("obreniendo recipe ",response);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
+    Swal.fire({
+      title: "¿Desea guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      denyButtonText: `No guardar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.recipeServices.editRecipe(this.idRecipe, this.currentRecipe).subscribe(
+          (response:any)=>{
+            console.log("obteniendo recipe ",response);
+          },
+          error=>{
+            console.log("Ocurrio un error al obtener recetas ", error);
+          }
+        );
+        Swal.fire("Guardado!", "", "success");
+        //this.router.navigate(['/', 'recipes']);
+      } else if (result.isDenied) {
+        Swal.fire("Los cambios no han sido guardados", "", "info");
       }
-    );
+    });
+
 
   }
 
