@@ -25,37 +25,64 @@ export class RecipeCardComponent implements OnInit {
     private recipeServices: RecipesService) {}
 
   ngOnInit(): void {
-    this.updateHeartIcon();
+    //this.updateHeartIcon();
   }
 
-  updateHeartIcon(): void {
-    if (this.favoritesService.isFavorite(this.recipe._id)) {
-      this.heartIconClass = 'bi bi-suit-heart-fill';
-    } else {
-      this.heartIconClass = 'bi bi-suit-heart';
-    }
+  // updateHeartIcon(): void {
+  //   if (this.favoritesService.isFavorite(this.recipe._id)) {
+  //     this.heartIconClass = 'bi bi-suit-heart-fill';
+  //   } else {
+  //     this.heartIconClass = 'bi bi-suit-heart';
+  //   }
+  // }
+
+  // toggleIcon(state: string) {
+  //   switch (state) {
+  //     case 'normal':
+  //       if (!this.favoritesService.isFavorite(this.recipe._id)) {
+  //         this.heartIconClass = 'bi bi-suit-heart';
+  //       }
+  //       break;
+  //     case 'filled':
+  //     case 'clicked':
+  //       this.heartIconClass = 'bi bi-suit-heart-fill';
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
+
+  // sendToFavorites() {
+  //   if (this.favoritesService.isFavorite(this.recipe._id)) {
+  //     this.favoritesService.removeFavorite(this.recipe._id);
+  //     this.heartIconClass = 'bi bi-suit-heart';
+  //     Swal.fire({
+  //       position: 'top-end',
+  //       icon: 'success',
+  //       title: 'Receta eliminada de Favoritos',
+  //       showConfirmButton: false,
+  //       timer: 1500
+  //     });
+  //   } else {
+  //     this.favoritesService.addFavorite(this.recipe);
+  //     this.heartIconClass = 'bi bi-suit-heart-fill';
+  //     Swal.fire({
+  //       position: 'top-end',
+  //       icon: 'success',
+  //       title: 'Receta agregada a Favoritos',
+  //       showConfirmButton: false,
+  //       timer: 1500
+  //     });
+  //   }
+  // }
+
+  isFavorite(): boolean {
+    return this.favoritesService.isFavorite(this.recipe._id);
   }
 
-  toggleIcon(state: string) {
-    switch (state) {
-      case 'normal':
-        if (!this.favoritesService.isFavorite(this.recipe._id)) {
-          this.heartIconClass = 'bi bi-suit-heart';
-        }
-        break;
-      case 'filled':
-      case 'clicked':
-        this.heartIconClass = 'bi bi-suit-heart-fill';
-        break;
-      default:
-        break;
-    }
-  }
-
-  sendToFavorites() {
-    if (this.favoritesService.isFavorite(this.recipe._id)) {
+  toggleFavorite() {
+    if (this.isFavorite()) {
       this.favoritesService.removeFavorite(this.recipe._id);
-      this.heartIconClass = 'bi bi-suit-heart';
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -65,7 +92,6 @@ export class RecipeCardComponent implements OnInit {
       });
     } else {
       this.favoritesService.addFavorite(this.recipe);
-      this.heartIconClass = 'bi bi-suit-heart-fill';
       Swal.fire({
         position: 'top-end',
         icon: 'success',

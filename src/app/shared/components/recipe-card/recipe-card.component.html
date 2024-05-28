@@ -1,13 +1,7 @@
   <div class="card m-3" style="width: 18rem; height: 25rem;">
     <div class="position-relative" style="width: 18rem; height: 12rem;">
-      <a href="javascript:void(0)"
-        (click)="sendToFavorites()"
-        class="icon-overlay"
-        (mouseenter)="toggleIcon('filled')"
-        (mouseleave)="toggleIcon('normal')"
-        (mousedown)="toggleIcon('clicked')"
-        (mouseup)="toggleIcon('filled')">
-        <i [ngClass]="heartIconClass"></i>
+      <a href="javascript:void(0)" class="icon-overlay">
+        <i [ngClass]="{ 'bi-suit-heart-fill': isFavorite(), 'bi-suit-heart': !isFavorite() }" (click)="toggleFavorite()"></i>
       </a>
       <a routerLink="/recipes/edit/{{recipe._id}}"><img src="{{recipe.imagePath}}" class="card-img w-100 h-100 object-fit-cover" alt="Recipe Image" ></a>
     </div>

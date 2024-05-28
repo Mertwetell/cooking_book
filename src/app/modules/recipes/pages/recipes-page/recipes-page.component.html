@@ -1,6 +1,6 @@
 <div class="container px-0 my-5 text-center d-flex flex-column align-items-center">
   <h3>LISTA DE RECETAS</h3>
-  <div class="m-4">
+  <div class="m-3">
     <input type="text" [(ngModel)]="searchTerm" (input)="filterRecipes()" placeholder="Buscar receta por nombre" class="form-control" style="width: 18rem;">
   </div>
   <div *ngIf="filteredRecipes.length == 0" lass="mb-5">
