@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionGuard implements CanActivate{
-  
+
   constructor (private cookieService:CookieService,private router:Router) {  }
   //: Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -18,17 +18,14 @@ export class SessionGuard implements CanActivate{
     try{
       const isToken:boolean=this.cookieService.check('token');
       const token=this.cookieService.get('token')
-      
-      console.log('ok', isToken)
-      console.log('el valor es', token)
-      
+
       if(token!=undefined && token.length>0){
        return true;
       }else{
-        this.router.navigate(['auth']);  
+        this.router.navigate(['/', 'auth/login']);
         return false;
       }
-       
+
      // return isToken;
 
     }catch(ex){

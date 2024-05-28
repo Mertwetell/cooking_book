@@ -1,6 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import { IngredientModel } from '@core/models/ingredient.model';
 import { RecipesService } from '@shared/services/recipes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ingredient-page',
@@ -27,7 +28,11 @@ export class IngredientPageComponent implements  OnInit  {
     try {
       this.IngredientsList = await this.recipeServices.getAllIngredients().toPromise();
     } catch (error) {
-      console.error('Error obteniendo recetas:', error);
+        Swal.fire({
+          title: "Error",
+          text: "Error al obtener ingredientes, inténtelo más tarde",
+          icon: "error",
+        });
     } finally {
       this.isLoading = false;
     }

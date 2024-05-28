@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
+import Swal from 'sweetalert2';
 
 import { RecipesService } from '@shared/services/recipes.service';
 
@@ -38,7 +39,11 @@ export class RecipesPageComponent implements OnInit {
     try {
       this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
     } catch (error) {
-      console.error('Error obteniendo recetas:', error);
+        Swal.fire({
+          title: "Error",
+          text: "Error al obtener recetas, inténtelo más tarde",
+          icon: "error",
+        });
     } finally {
       this.isLoading = false;
     }
@@ -53,7 +58,11 @@ export class RecipesPageComponent implements OnInit {
         this.getRecipes();
       },
       error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
+        Swal.fire({
+          title: "Error",
+          text: "Error al borrar receta, inténtelo más tarde",
+          icon: "error",
+        });
       }
     );
 

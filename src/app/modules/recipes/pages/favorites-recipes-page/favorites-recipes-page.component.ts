@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeModel } from '@core/models/recipe.model';
 import { FavoritesService } from '@shared/services/favorites.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-favorites-recipes-page',
@@ -20,8 +21,16 @@ export class FavoritesRecipesPageComponent implements OnInit {
 
   private async loadFavoriteRecipes() {
     this.isLoading = true;
-    this.favoritesRecipes = await this.favoritesService.getFavorites();
-    this.isLoading = false;
+    try {
+      this.favoritesRecipes = await this.favoritesService.getFavorites();
+      this.isLoading = false;
+    } catch (error) {
+        Swal.fire({
+          title: "Error",
+          text: "Error al obtener ingredientes, inténtelo más tarde",
+          icon: "error",
+        });
+    }
   }
 }
 

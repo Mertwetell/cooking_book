@@ -37,6 +37,10 @@ export class AuthService {
     }
   }
 
+  isAuthenticated(): boolean {
+    return !!this.cookieService.get('token');
+  }
+
   logOut(){
     this.cookieService.set('token', "", 0, '/');
   }
