@@ -83,7 +83,14 @@ export class RecipeCardComponent {
               text: "La receta ha sido eliminada",
               icon: "success"
             }).then(() => {
+              if (window.location.pathname === '/recipes/favorites') {
+              setTimeout(() => {
+                this.router.navigate(['/recipes']);
+              }, 1000);
+            }else{
               window.location.reload();
+            }
+              
             });
           },
           error=>{
