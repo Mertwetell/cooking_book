@@ -18,6 +18,5 @@ export class FavoritesRecipesPageComponent implements OnInit {
 
   loadFavorites() {
     this.favoritesRecipes = this.favoritesService.getFavorites();
-    console.log('Favoritos cargados', this.favoritesRecipes);
   }
 }

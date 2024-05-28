@@ -30,12 +30,6 @@
 .card {
   cursor: pointer;
 }
-
-@media (max-width: 450px) {
-  .icon-overlay {
-    font-size: 4rem;
-  }
-  .card-add-recipes {
-    height: 35vh;
-  }
+.form-control{
+  cursor:text;
 }

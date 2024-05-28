@@ -1,18 +1,20 @@
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Cantidad</th>
-      <!--<th scope="col">Handle</th>-->
-    </tr>
-  </thead>
-  <tbody *ngIf="IngredientsList">
-    <tr *ngFor="let ingr of IngredientsList;index as ind">
-      <th scope="row">{{ind+1}}</th>
-      <td>{{ingr.name}}</td>
-      <td>{{ingr.amount}}</td>
-    </tr>
-   
-  </tbody>
-</table>
+<div class="container">
+  <h3 class="text-center m-5">LISTA DE INGREDIENTES</h3>
+  <table class="table table-dark text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+        <!--<th scope="col">Handle</th>-->
+      </tr>
+    </thead>
+    <tbody *ngIf="IngredientsList">
+      <tr *ngFor="let ingr of IngredientsList;index as ind">
+        <th scope="row">{{ind+1}}</th>
+        <td>{{ingr.name}}</td>
+        <td>{{ingr.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

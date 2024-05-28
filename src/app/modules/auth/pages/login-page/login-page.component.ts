@@ -30,11 +30,11 @@ export class LoginPageComponent implements OnInit {
 
       this.formLogin = new FormGroup (
         {
-          email: new FormControl('febo6@febo.com', [
+          email: new FormControl('', [
             Validators.required,
             Validators.email
           ]),
-          password: new FormControl('123456',
+          password: new FormControl('',
             [
               Validators.required,
               Validators.minLength(6),

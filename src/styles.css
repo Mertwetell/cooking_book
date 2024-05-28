@@ -44,3 +44,9 @@ li
 a {
   text-decoration: none;
 }
+
+h3 {
+  text-decoration: underline;
+  color: var(--color-3);
+  text-underline-offset: 0.2em;
+}

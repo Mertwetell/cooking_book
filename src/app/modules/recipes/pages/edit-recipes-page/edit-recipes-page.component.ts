@@ -88,6 +88,7 @@ export class EditRecipesPageComponent implements OnInit {
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Guardar",
+      confirmButtonColor: "#6e936a",
       cancelButtonText: "Cancelar",
       denyButtonText: `No guardar`
     }).then((result) => {

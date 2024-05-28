@@ -1,16 +1,20 @@
 <div class="container px-0 my-5 text-center d-flex flex-column align-items-center">
-  <div class="mb-5">
+  <h3>LISTA DE RECETAS</h3>
+  <div class="m-4">
     <input type="text" [(ngModel)]="searchTerm" (input)="filterRecipes()" placeholder="Buscar receta por nombre" class="form-control" style="width: 18rem;">
+  </div>
+  <div *ngIf="filteredRecipes.length == 0" lass="mb-5">
+    <p>Ningún elemento coincide con el criterio de búsqueda.</p>
   </div>
   <div class="d-flex flex-wrap justify-content-center">
     <li *ngFor="let recipe of filteredRecipes">
       <app-recipe-card [recipe]="recipe"></app-recipe-card>
     </li>
-    <div *ngIf="filteredRecipes.length == recipesList.length" [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 18rem;">
-      <div class="card-body m-3">
+    <div *ngIf="filteredRecipes.length == recipesList.length" [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 18rem; height: 25rem;">
+      <div class="card-body m-3 d-flex align-items-center justify-content-center">
         <a routerLink="/recipes/new">
           <i class="bi bi-plus-circle icon-overlay"></i>
-          <p class="add-card-text">AGREGAR RECETA</p>
+          <p class="add-card-text m-0">AGREGAR RECETA</p>
         </a>
       </div>
     </div>

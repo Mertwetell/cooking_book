@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RecipeModel } from '@core/models/recipe.model';
 import { FavoritesService } from '@shared/services/favorites.service';
+import { RecipesService } from '@shared/services/recipes.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +21,8 @@ export class RecipeCardComponent implements OnInit {
 
   heartIconClass: string = 'bi bi-suit-heart';
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService,
+    private recipeServices: RecipesService) {}
 
   ngOnInit(): void {
     this.updateHeartIcon();
@@ -72,5 +74,34 @@ export class RecipeCardComponent implements OnInit {
         timer: 1500
       });
     }
+  }
+
+  deleteRecipe(idRecipe: string){
+    Swal.fire({
+      title: "¿Desea eliminar la receta?",
+      text: "Esta acción es irreversible",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6e936a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borrar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.recipeServices.deleteRecipe(idRecipe).subscribe(
+          (response:any)=>{
+            console.log("borrando recipe ",response);
+          },
+          error=>{
+            console.log("Ocurrio un error al borrar receta ", error);
+          }
+        );
+        Swal.fire({
+          title: "Eliminado!",
+          text: "La receta ha sido eliminada",
+          icon: "success"
+        });
+      }
+    });
   }
 }

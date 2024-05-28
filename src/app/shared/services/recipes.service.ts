@@ -25,8 +25,9 @@ export class RecipesService {
 
       return this.httClient.get(`${this.url}/recipes/get?key=${id}`).pipe(
         map((recipes:any)=>{
-          return recipes[0];
+          const recipe = recipes.find((recipe: any) => recipe._id === id);
 
+          return recipe || null;
         })
       );
     }
