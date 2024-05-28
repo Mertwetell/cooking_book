@@ -1,16 +1,17 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly URL = environment.api
-  constructor(private cookieService: CookieService,private http: HttpClient) { }
+  constructor(private cookieService: CookieService,private http: HttpClient,  private router: Router) { }
 
   sendCredentials(email: string, password: string): Observable<any> {
     try {
@@ -43,5 +44,19 @@ export class AuthService {
 
   logOut(){
     this.cookieService.set('token', "", 0, '/');
+    this.router.navigate(['/', 'auth']);
   }
+
+   validToken(httpError:HttpErrorResponse){
+
+    let {error}=httpError;
+
+
+    if(error=="Invalid token"){
+      console.log("debe salir")
+     this.logOut();
+    }
+
+   }
+
 }

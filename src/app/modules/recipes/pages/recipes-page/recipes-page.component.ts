@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
+import { AuthService } from '@modules/auth/services/auth.service';
 import Swal from 'sweetalert2';
 
 import { RecipesService } from '@shared/services/recipes.service';
@@ -18,7 +19,7 @@ export class RecipesPageComponent implements OnInit {
   isLoading: boolean = true;
 
   //--------------------------
-  constructor(private recipeServices:RecipesService , private router: Router )
+  constructor(private recipeServices:RecipesService , private authService:AuthService , private router: Router )
   {
 
   }
@@ -38,14 +39,17 @@ export class RecipesPageComponent implements OnInit {
     this.isLoading = true;
     try {
       this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
-    } catch (error) {
+    } catch (error:any) {
         Swal.fire({
           title: "Error",
           text: "Error al obtener recetas, inténtelo más tarde",
           icon: "error",
         });
+        this.authService.validToken(error);
     } finally {
       this.isLoading = false;
+      
+     
     }
   }
 

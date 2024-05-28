@@ -27,7 +27,7 @@ export class NewRecipesPageComponent implements OnInit {
 
 //-------------------
 
-  addIngredient(){
+  addRecipe(){
 
     let newRecipe:RecipeModel= this.recipeContex.getRecipeModel();
 
@@ -61,7 +61,7 @@ export class NewRecipesPageComponent implements OnInit {
       }
     });
 
-    this.recipeServices.addRecipe(newRecipe).subscribe(
+   /* this.recipeServices.addRecipe(newRecipe).subscribe(
       (response:any[])=>{
 
         console.log("obreniendo recipes ",response);
@@ -70,6 +70,6 @@ export class NewRecipesPageComponent implements OnInit {
       error=>{
         console.log("Ocurrio un error al obtener recetas ", error);
       }
-    );
+    );*/
   }
 }

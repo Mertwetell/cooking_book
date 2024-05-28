@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class EditRecipesPageComponent implements OnInit {
 
   idRecipe:string="";
-  currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
+  currentRecipe:any={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
   isEdit:boolean=false;
   isLoading: boolean = true;
 
@@ -24,8 +24,13 @@ export class EditRecipesPageComponent implements OnInit {
 
   async ngOnInit() {
     this.idRecipe=this.route.snapshot.params["id"];
-    this.isEdit=this.route.snapshot.queryParams['isEdit'];
-
+    try{
+      this.isEdit=this.route.snapshot.queryParams['isEdit'];
+    }catch(error){
+      this.isEdit=false;
+    }
+    
+    
     await this.getRecipe();
     this.isLoading = false;
   }
@@ -38,18 +43,19 @@ export class EditRecipesPageComponent implements OnInit {
   //-----------
   addnewRowIngredient(){
     if(this.currentRecipe.ingredients.length>0){
-      const listTmp=this.currentRecipe.ingredients.filter(a=>a.name.length==0);
+      const listTmp=this.currentRecipe.ingredients.filter((a:any)=>a.name.length==0);
       if(listTmp.length>0){
         return;
        }
     }
-    this.currentRecipe.ingredients.push({_id:"", name:"",amount:0,edit:true,delete:false });
+    this.currentRecipe.ingredients.push({ name:"",amount:1 });
   }
 
-  editRowIngredient(){
-  }
+  /*editRowIngredient(){
+  }*/
 
-  deleteRowIngredient(){
+  deleteRowIngredient(index:number){
+    this.currentRecipe.ingredients.splice(index,1);
   }
   //--------------
   async getRecipe(){
@@ -72,14 +78,7 @@ export class EditRecipesPageComponent implements OnInit {
 
   saveRecipe(){
 
-    // let newDataRecipe:RecipeModel= {
-    //   // _id:"",
-    //   name: "",
-    //   description: "",
-    //   imagePath: "",
-    //   ingredients:[]
-    // };
-
+    
     Swal.fire({
       title: "¿Desea guardar los cambios?",
       showDenyButton: true,
@@ -93,6 +92,7 @@ export class EditRecipesPageComponent implements OnInit {
         this.recipeServices.editRecipe(this.idRecipe, this.currentRecipe).subscribe(
           (response:any)=>{
             console.log("obteniendo recipe ",response);
+            this.router.navigate(['/', 'recipes']);
           },
           error=>{
             console.log("Ocurrio un error al obtener recetas ", error);
