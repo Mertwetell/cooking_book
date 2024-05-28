@@ -19,8 +19,6 @@ export class RecipeCardComponent {
     ingredients: [{_id:"", name: '', amount: 0, edit: false, delete: false }],
   };
 
-  heartIconClass: string = 'bi bi-suit-heart';
-
   constructor(private favoritesService: FavoritesService,
     private recipeServices: RecipesService) {}
 
@@ -38,6 +36,12 @@ export class RecipeCardComponent {
         title: 'Receta eliminada de Favoritos',
         showConfirmButton: false,
         timer: 1500
+      }).then(() => {
+        if (window.location.pathname === '/recipes/favorites') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }
       });
     } else {
       this.favoritesService.addFavorite(this.recipe);
@@ -47,6 +51,12 @@ export class RecipeCardComponent {
         title: 'Receta agregada a Favoritos',
         showConfirmButton: false,
         timer: 1500
+      }).then(() => {
+        if (window.location.pathname === '/recipes/favorites') {
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }
       });
     }
   }
@@ -66,16 +76,18 @@ export class RecipeCardComponent {
         this.recipeServices.deleteRecipe(idRecipe).subscribe(
           (response:any)=>{
             console.log("borrando recipe ",response);
+            Swal.fire({
+              title: "Eliminado!",
+              text: "La receta ha sido eliminada",
+              icon: "success"
+            }).then(() => {
+              window.location.reload();
+            });
           },
           error=>{
             console.log("Ocurrio un error al borrar receta ", error);
           }
         );
-        Swal.fire({
-          title: "Eliminado!",
-          text: "La receta ha sido eliminada",
-          icon: "success"
-        });
       }
     });
   }
