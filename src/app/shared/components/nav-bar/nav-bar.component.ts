@@ -8,11 +8,11 @@ import { AuthService } from '@modules/auth/services/auth.service';
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
-  constructor(private authService: AuthService,  private router: Router){
+  constructor(private authService: AuthService){
   
   }
   logout(){
     this.authService.logOut();
-    this.router.navigate(['/', 'auth'])
+    
   }
 }

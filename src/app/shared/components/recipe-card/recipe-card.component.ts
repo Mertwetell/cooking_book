@@ -16,7 +16,7 @@ export class RecipeCardComponent implements OnInit {
     name: '',
     description: '',
     imagePath: '',
-    ingredients: [{_id:"", name: '', amount: 0, edit: false, delete: false }],
+    ingredients: [{_id:"", name: '', amount: 0 }],
   };
 
   heartIconClass: string = 'bi bi-suit-heart';

@@ -1,14 +1,15 @@
-import { Observable } from 'rxjs';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 
 
 @Injectable()
 export class InjectSessionInterceptor implements HttpInterceptor{
 
-  constructor(private cookieService: CookieService){}
+  constructor(private cookieService: CookieService, private router: Router){}
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -42,7 +43,7 @@ export class InjectSessionInterceptor implements HttpInterceptor{
         // console.log("esta es la url", urlRequests);
         //return next.handle(req);
        return next.handle(newRequets);
-
+       //.pipe(catchError( this.InvalidTokenManager));
       }
 
     } catch (error) {
@@ -52,5 +53,20 @@ export class InjectSessionInterceptor implements HttpInterceptor{
     }
 
   }
+
+   InvalidTokenManager(error:HttpErrorResponse){
+     //console.log("este error",error);
+     let {statusText}=error;
+
+
+      if(statusText=="Unauthorized"){
+        this.cookieService.set('token', "", 0, '/');
+        console.log("lo mando a login",statusText);
+        
+        console.log("tokenlimpio",this.cookieService.get('token'));
+        //this.router.navigate(['/', 'auth']);
+      }
+     return throwError( error);
+   }
 
 }

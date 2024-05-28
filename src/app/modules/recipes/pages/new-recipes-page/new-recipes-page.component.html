@@ -15,7 +15,7 @@
     <!-- <img [src]="recipeContex.formRecipe.value.imagePath" class="rounded recipe-img" alt="recipe-img"> -->
   </div>
   <div class="edit-container-left">
-      <form [formGroup]="recipeContex.formRecipe"  (ngSubmit)="addIngredient()" >
+      <form [formGroup]="recipeContex.formRecipe"  (ngSubmit)="addRecipe()" >
 
           <div class="mb-3">
             <label for="name" class="form-label">Nombre:</label>
@@ -40,7 +40,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Cantidad</th>
-                  <th scope="col"><button type="button" class="btn button button-plus" (click)="recipeContex.addnewIngredient()"><i class="bi bi-plus"></i></button> </th>
+                  <th scope="col"><button type="button" class="btn button button-plus" [disabled]="(recipeContex.formRecipe.invalid)"   (click)="recipeContex.addnewIngredient()"><i class="bi bi-plus"></i></button> </th>
                 </tr>
               </thead>
               <tbody formArrayName="ingredients" *ngIf="(recipeContex.fIngredients.value|json).length>0">
@@ -64,7 +64,7 @@
               </tbody>
             </table>
           </div>
-          {{recipeContex.formRecipe.valid}}
+         <!-- {{recipeContex.formRecipe.valid}}-->
 
               <button type="submit" [disabled]="(recipeContex.formRecipe.invalid || recipeContex.formRecipe.untouched)" class="btn login-btn button  mt-3">Guardar</button>
 
@@ -72,7 +72,7 @@
             <!--<div>
               {{currentFormRecipe.invalid || currentFormRecipe.untouched}}
             </div>-->
-            <div>{{recipeContex.formRecipe.value|json}}</div>
+            <!--<div>{{recipeContex.formRecipe.value|json}}</div>-->
       </form>
 
   </div>
