@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   templateUrl: './recipe-card.component.html',
   styleUrl: './recipe-card.component.css',
 })
-export class RecipeCardComponent implements OnInit {
+export class RecipeCardComponent {
   @Input()
   recipe: RecipeModel = {
     _id: '',
@@ -24,57 +24,6 @@ export class RecipeCardComponent implements OnInit {
   constructor(private favoritesService: FavoritesService,
     private recipeServices: RecipesService) {}
 
-  ngOnInit(): void {
-    //this.updateHeartIcon();
-  }
-
-  // updateHeartIcon(): void {
-  //   if (this.favoritesService.isFavorite(this.recipe._id)) {
-  //     this.heartIconClass = 'bi bi-suit-heart-fill';
-  //   } else {
-  //     this.heartIconClass = 'bi bi-suit-heart';
-  //   }
-  // }
-
-  // toggleIcon(state: string) {
-  //   switch (state) {
-  //     case 'normal':
-  //       if (!this.favoritesService.isFavorite(this.recipe._id)) {
-  //         this.heartIconClass = 'bi bi-suit-heart';
-  //       }
-  //       break;
-  //     case 'filled':
-  //     case 'clicked':
-  //       this.heartIconClass = 'bi bi-suit-heart-fill';
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
-
-  // sendToFavorites() {
-  //   if (this.favoritesService.isFavorite(this.recipe._id)) {
-  //     this.favoritesService.removeFavorite(this.recipe._id);
-  //     this.heartIconClass = 'bi bi-suit-heart';
-  //     Swal.fire({
-  //       position: 'top-end',
-  //       icon: 'success',
-  //       title: 'Receta eliminada de Favoritos',
-  //       showConfirmButton: false,
-  //       timer: 1500
-  //     });
-  //   } else {
-  //     this.favoritesService.addFavorite(this.recipe);
-  //     this.heartIconClass = 'bi bi-suit-heart-fill';
-  //     Swal.fire({
-  //       position: 'top-end',
-  //       icon: 'success',
-  //       title: 'Receta agregada a Favoritos',
-  //       showConfirmButton: false,
-  //       timer: 1500
-  //     });
-  //   }
-  // }
 
   isFavorite(): boolean {
     return this.favoritesService.isFavorite(this.recipe._id);
