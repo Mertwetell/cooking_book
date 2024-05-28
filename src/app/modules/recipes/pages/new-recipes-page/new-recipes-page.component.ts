@@ -1,46 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecipeModel } from '@core/models/recipe.model';
+import { RecipeViewModel } from '@core/models/recipe.view.model';
 import { RecipesService } from '@shared/services/recipes.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-recipes-page',
   templateUrl: './new-recipes-page.component.html',
   styleUrl: './new-recipes-page.component.css'
 })
-export class NewRecipesPageComponent {
+export class NewRecipesPageComponent implements OnInit {
 
-  newRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
-  formNewRecipe: FormGroup = new FormGroup({});
+  recipeContex:RecipeViewModel=new RecipeViewModel();
 
-  constructor(private recipeServices:RecipesService)
+  constructor(private recipeServices:RecipesService,private router: Router)
   {
 
   }
 
-  addRecipe(){
+  ngOnInit(): void {
+    this.recipeContex.newRecipe();
 
-    //const { name, description, imagePath } = this.formNewRecipe.value
+  }
 
-    // let newRecipe: RecipeModel = {
-    //   //TODO: FALTA INGREDIENTES Y ID
-    //   _id:"",
-    //   name: name,
-    //   description: description,
-    //   imagePath: imagePath,
-    //   ingredients:[]
-    // };
+//-------------------
 
+  addIngredient(){
 
-    // this.recipeServices.addRecipe(newRecipe).subscribe(
-    //   (response:any[])=>{
+    let newRecipe:RecipeModel= this.recipeContex.getRecipeModel();
 
+    console.log(newRecipe);
 
-    //     console.log("obreniendo recipes ",response);
-    //   },
-    //   error=>{
-    //     console.log("Ocurrio un error al obtener recetas ", error);
-    //   }
-    // );
+    Swal.fire({
+      title: "¿Desea guardar los cambios?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      denyButtonText: `No guardar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.recipeServices.addRecipe(newRecipe).subscribe(
+          (response:any[])=>{
+
+            console.log("obreniendo recipes ",response);
+            this.router.navigate(['/', 'recipes']);
+          },
+          error=>{
+            console.log("Ocurrio un error al obtener recetas ", error);
+          }
+        );
+
+        Swal.fire("Guardado!", "", "success");
+        //this.router.navigate(['/', 'recipes']);
+      } else if (result.isDenied) {
+        Swal.fire("Los cambios no han sido guardados", "", "info");
+      }
+    });
+
+    this.recipeServices.addRecipe(newRecipe).subscribe(
+      (response:any[])=>{
+
+        console.log("obreniendo recipes ",response);
+        this.router.navigate(['/', 'recipes']);
+      },
+      error=>{
+        console.log("Ocurrio un error al obtener recetas ", error);
+      }
+    );
   }
 }

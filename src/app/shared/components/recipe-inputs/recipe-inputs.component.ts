@@ -15,7 +15,7 @@ export class RecipeInputsComponent {
     name: '',
     description: '',
     imagePath: '',
-    ingredients: [{ name: '', amount: 0 ,edit:false, delete:false}]
+    ingredients: [{_id:"", name: '', amount: 0 ,edit:false, delete:false}]
   };
   @Input() formGroup = new FormGroup({});
   @Input() useReactiveForm: boolean = true;

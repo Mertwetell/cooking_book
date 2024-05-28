@@ -41,7 +41,7 @@ export class EditRecipesPageComponent implements OnInit {
         return;
        }
     }
-    this.currentRecipe.ingredients.push({name:"",amount:0,edit:true,delete:false });
+    this.currentRecipe.ingredients.push({_id:"", name:"",amount:0,edit:true,delete:false });
   }
 
   editRowIngredient(){
