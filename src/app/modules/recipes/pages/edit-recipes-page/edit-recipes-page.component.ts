@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
+import { AuthService } from '@modules/auth/services/auth.service';
 import { RecipesService } from '@shared/services/recipes.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +18,7 @@ export class EditRecipesPageComponent implements OnInit {
   isEdit:boolean=false;
   isLoading: boolean = true;
 
-  constructor(private route:ActivatedRoute,private recipeServices:RecipesService, private router: Router)
+  constructor(private route:ActivatedRoute,private recipeServices:RecipesService,private authService:AuthService ,private router: Router)
   {
 
   }
@@ -61,8 +62,14 @@ export class EditRecipesPageComponent implements OnInit {
   async getRecipe(){
     try {
       this.currentRecipe = await this.recipeServices.getRecipe(this.idRecipe).toPromise();
-    } catch (error) {
+    } catch (error:any) {
       console.error('Error obteniendo recetas:', error);
+      Swal.fire({
+        title: "Error",
+        text: "Error al obtener receta, inténtelo más tarde",
+        icon: "error",
+      });
+      this.authService.validToken(error);
     } finally {
       this.isLoading = false;
     }
@@ -96,6 +103,12 @@ export class EditRecipesPageComponent implements OnInit {
           },
           error=>{
             console.log("Ocurrio un error al obtener recetas ", error);
+            Swal.fire({
+              title: "Error",
+              text: "Error al guardar receta, inténtelo más tarde",
+              icon: "error",
+            });
+            this.authService.validToken(error);
           }
         );
         Swal.fire("Guardado!", "", "success");

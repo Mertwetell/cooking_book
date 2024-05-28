@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeModel } from '@core/models/recipe.model';
+import { AuthService } from '@modules/auth/services/auth.service';
 import { FavoritesService } from '@shared/services/favorites.service';
 import Swal from 'sweetalert2';
 
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class FavoritesRecipesPageComponent implements OnInit {
   favoritesRecipes: RecipeModel[] = [];
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService, private authService:AuthService) {}
 
   isLoading: boolean = true;
 
@@ -24,12 +25,13 @@ export class FavoritesRecipesPageComponent implements OnInit {
     try {
       this.favoritesRecipes = await this.favoritesService.getFavorites();
       this.isLoading = false;
-    } catch (error) {
+    } catch (error:any) {
         Swal.fire({
           title: "Error",
           text: "Error al obtener ingredientes, inténtelo más tarde",
           icon: "error",
         });
+        this.authService.validToken(error);
     }
   }
 }
