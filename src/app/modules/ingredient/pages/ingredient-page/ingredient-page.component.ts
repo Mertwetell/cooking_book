@@ -8,32 +8,31 @@ import { RecipesService } from '@shared/services/recipes.service';
   styleUrl: './ingredient-page.component.css'
 })
 export class IngredientPageComponent implements  OnInit  {
- 
+
   IngredientsList:IngredientModel[]=[];
+  isLoading: boolean = true;
 
   constructor(private recipeServices:RecipesService)
   {
-    
+
   }
-  ngOnInit(): void {
-    this.getIngredients();
+  async ngOnInit() {
+    await this.getIngredients();
   }
-  
+
   //--------------
-  getIngredients(){
+  async getIngredients(){
+    this.isLoading = true;
 
-    this.recipeServices.getAllIngredients().subscribe(
-      (response:IngredientModel[])=>{
-
-        this.IngredientsList=response;
-        console.log("obreniendo ingredientes ",response);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
-      }
-    );
-
+    try {
+      this.IngredientsList = await this.recipeServices.getAllIngredients().toPromise();
+    } catch (error) {
+      console.error('Error obteniendo recetas:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
 
 }
+

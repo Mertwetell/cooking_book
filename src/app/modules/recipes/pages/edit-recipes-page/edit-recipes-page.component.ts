@@ -15,17 +15,19 @@ export class EditRecipesPageComponent implements OnInit {
   idRecipe:string="";
   currentRecipe:RecipeModel={name:"", description:"",_id:"", imagePath:"", ingredients:[] };
   isEdit:boolean=false;
+  isLoading: boolean = true;
 
   constructor(private route:ActivatedRoute,private recipeServices:RecipesService, private router: Router)
   {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.idRecipe=this.route.snapshot.params["id"];
     this.isEdit=this.route.snapshot.queryParams['isEdit'];
 
-    this.getRecipe();
+    await this.getRecipe();
+    this.isLoading = false;
   }
 
   toggleEdit(event: Event): void {
@@ -50,19 +52,14 @@ export class EditRecipesPageComponent implements OnInit {
   deleteRowIngredient(){
   }
   //--------------
-  getRecipe(){
-
-    this.recipeServices.getRecipe(this.idRecipe).subscribe(
-      (response:RecipeModel)=>{
-
-        this.currentRecipe=response;
-        console.log("obreniendo recipe ",response);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
-      }
-    );
-
+  async getRecipe(){
+    try {
+      this.currentRecipe = await this.recipeServices.getRecipe(this.idRecipe).toPromise();
+    } catch (error) {
+      console.error('Error obteniendo recetas:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   // async getRecipes() {

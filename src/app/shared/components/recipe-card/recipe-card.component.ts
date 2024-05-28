@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipeModel } from '@core/models/recipe.model';
 import { FavoritesService } from '@shared/services/favorites.service';
 import { RecipesService } from '@shared/services/recipes.service';
@@ -20,7 +21,8 @@ export class RecipeCardComponent {
   };
 
   constructor(private favoritesService: FavoritesService,
-    private recipeServices: RecipesService) {}
+    private recipeServices: RecipesService,
+    private router: Router) {}
 
 
   isFavorite(): boolean {
@@ -39,7 +41,7 @@ export class RecipeCardComponent {
       }).then(() => {
         if (window.location.pathname === '/recipes/favorites') {
           setTimeout(() => {
-            window.location.reload();
+            this.router.navigate(['/recipes']);
           }, 1000);
         }
       });
@@ -54,7 +56,7 @@ export class RecipeCardComponent {
       }).then(() => {
         if (window.location.pathname === '/recipes/favorites') {
           setTimeout(() => {
-            window.location.reload();
+             this.router.navigate(['/recipes']);
           }, 1000);
         }
       });

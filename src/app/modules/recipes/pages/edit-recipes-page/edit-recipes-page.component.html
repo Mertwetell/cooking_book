@@ -1,77 +1,85 @@
-<div class="edit-container d-flex justify-content-evenly">
-  <div class="d-flex flex-column edit-container-right justify-content-start">
-    <h3 class="text-center recipe-name">{{currentRecipe.name}}</h3>
-    <img [src]="currentRecipe.imagePath" class="rounded recipe-img" alt="recipe-img">
+<div class="container">
+  <div *ngIf="isLoading" class="d-flex justify-content-center align-items-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
   </div>
-  <div class="edit-container-left">
-    <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
-        <div class="mb-3">
-              <div class="d-flex justify-content-between mb-3">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="isEdit" (change)="toggleEdit($event)">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Editar</label>
+  <div *ngIf="!isLoading" class="edit-container d-flex justify-content-evenly">
+    <div class="d-flex flex-column edit-container-right justify-content-start">
+      <h3 class="text-center recipe-name">{{currentRecipe.name}}</h3>
+      <img [src]="currentRecipe.imagePath" class="rounded recipe-img" alt="recipe-img">
+    </div>
+    <div class="edit-container-left">
+      <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
+          <div class="mb-3">
+                <div class="d-flex justify-content-between mb-3">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="isEdit" (change)="toggleEdit($event)">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Editar</label>
+                  </div>
+
+                  <button type="submit" [disabled]="(recipForm.invalid || !isEdit)" class="btn login-btn button">Guardar</button>
                 </div>
+          </div>
+          <fieldset [disabled]="!isEdit">
+            <!-- <app-recipe-inputs [recipe]="currentRecipe"></app-recipe-inputs> -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre:</label>
+              <textarea type="text" name="name" class="form-control" [(ngModel)]="currentRecipe.name" placeholder="" required maxlength="100"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descripción:</label>
+              <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="imagePath" class="form-label">Imagen:</label>
+              <textarea type="text" name="imagePath" [(ngModel)]="currentRecipe.imagePath" class="form-control" placeholder="" maxlength="500"></textarea>
+            </div>
+            <label for="description" class="form-label">Ingredientes:</label>
+            <div class="mb-3">
+              <table class="table table-dark text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col"><button type="button" (click)="addnewRowIngredient()" class="btn button button-plus"><i class="bi bi-plus"></i></button> </th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="currentRecipe.ingredients">
+                    <tr *ngFor="let ingr of currentRecipe.ingredients;index as ind" [ngClass]="{'row_delete':ingr.delete}">
 
-                <button type="submit" [disabled]="(recipForm.invalid || !isEdit)" class="btn login-btn button">Guardar</button>
-              </div>
-        </div>
-        <fieldset [disabled]="!isEdit">
-          <!-- <app-recipe-inputs [recipe]="currentRecipe"></app-recipe-inputs> -->
-          <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
-            <textarea type="text" name="name" class="form-control" [(ngModel)]="currentRecipe.name" placeholder="" required maxlength="100"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Descripción:</label>
-            <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="imagePath" class="form-label">Imagen:</label>
-            <textarea type="text" name="imagePath" [(ngModel)]="currentRecipe.imagePath" class="form-control" placeholder="" maxlength="500"></textarea>
-          </div>
-          <label for="description" class="form-label">Ingredientes:</label>
-          <div class="mb-3">
-            <table class="table table-dark text-center">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col"><button type="button" (click)="addnewRowIngredient()" class="btn button button-plus"><i class="bi bi-plus"></i></button> </th>
-                  </tr>
-                </thead>
-                <tbody *ngIf="currentRecipe.ingredients">
-                  <tr *ngFor="let ingr of currentRecipe.ingredients;index as ind" [ngClass]="{'row_delete':ingr.delete}">
-
-                    <th scope="row">{{ind+1}}</th>
-                    <td>
-                        <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
-                            <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control" placeholder="" maxlength="50" required >
-                        </ng-template>
-                        <ng-template [ngIf]="ingr.edit!=true || ingr.delete==true">
-                            {{ingr.name}}
-                        </ng-template>
-                    </td>
-                    <td>
-                        <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
-                            <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control" placeholder="" max="99" min="1" required >
-                        </ng-template>
-                        <ng-template [ngIf]="ingr.edit!=true">
-                            {{ingr.amount}}
-                        </ng-template>
-                    </td>
-                    <td><button type="button" class="btn button button-edit me-2" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="bi bi-pencil"></i></button>
-                        <button type="button" class="btn button button-delete" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'bi bi-trash3':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-        </fieldset>
-        <!--<div>{{recipForm.untouched}}</div>
-        <div>{{recipForm.invalid}}</div>
-        <div>{{recipForm.invalid || recipForm.touched}}</div>-->
-        <div>{{currentRecipe|json}}</div>
-    </form>
+                      <th scope="row">{{ind+1}}</th>
+                      <td>
+                          <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
+                              <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control" placeholder="" maxlength="50" required >
+                          </ng-template>
+                          <ng-template [ngIf]="ingr.edit!=true || ingr.delete==true">
+                              {{ingr.name}}
+                          </ng-template>
+                      </td>
+                      <td>
+                          <ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">
+                              <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control" placeholder="" max="99" min="1" required >
+                          </ng-template>
+                          <ng-template [ngIf]="ingr.edit!=true">
+                              {{ingr.amount}}
+                          </ng-template>
+                      </td>
+                      <td><button type="button" class="btn button button-edit me-2" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="bi bi-pencil"></i></button>
+                          <button type="button" class="btn button button-delete" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'bi bi-trash3':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </fieldset>
+          <!--<div>{{recipForm.untouched}}</div>
+          <div>{{recipForm.invalid}}</div>
+          <div>{{recipForm.invalid || recipForm.touched}}</div>-->
+          <div>{{currentRecipe|json}}</div>
+      </form>
+    </div>
   </div>
 </div>
+

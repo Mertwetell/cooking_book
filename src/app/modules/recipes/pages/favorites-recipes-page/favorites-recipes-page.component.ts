@@ -12,11 +12,17 @@ export class FavoritesRecipesPageComponent implements OnInit {
 
   constructor(private favoritesService: FavoritesService) {}
 
-  ngOnInit() {
-    this.loadFavorites();
+  isLoading: boolean = true;
+
+  async ngOnInit() {
+    await this.loadFavoriteRecipes();
   }
 
-  loadFavorites() {
-    this.favoritesRecipes = this.favoritesService.getFavorites();
+  private async loadFavoriteRecipes() {
+    this.isLoading = true;
+    this.favoritesRecipes = await this.favoritesService.getFavorites();
+    this.isLoading = false;
   }
 }
+
+

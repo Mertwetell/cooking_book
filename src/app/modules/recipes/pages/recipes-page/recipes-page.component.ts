@@ -14,7 +14,7 @@ export class RecipesPageComponent implements OnInit {
   recipesList:RecipeModel[]=[];
   filteredRecipes: any[] = [];
   searchTerm: string = '';
-  inputWidth: string = '18rem';
+  isLoading: boolean = true;
 
   //--------------------------
   constructor(private recipeServices:RecipesService , private router: Router )
@@ -24,6 +24,7 @@ export class RecipesPageComponent implements OnInit {
   async ngOnInit() {
     await this.getRecipes();
     this.filteredRecipes = this.recipesList;
+    this.isLoading = false;
   }
 
   filterRecipes() {
@@ -33,10 +34,13 @@ export class RecipesPageComponent implements OnInit {
   }
 
   async getRecipes() {
+    this.isLoading = true;
     try {
       this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
     } catch (error) {
       console.error('Error obteniendo recetas:', error);
+    } finally {
+      this.isLoading = false;
     }
   }
 
