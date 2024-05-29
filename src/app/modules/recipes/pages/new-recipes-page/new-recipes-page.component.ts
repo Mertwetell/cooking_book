@@ -5,6 +5,7 @@ import { RecipeViewModel } from '@core/models/recipe.view.model';
 import { RecipesService } from '@shared/services/recipes.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '@modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-new-recipes-page',
@@ -15,7 +16,7 @@ export class NewRecipesPageComponent implements OnInit {
 
   recipeContex:RecipeViewModel=new RecipeViewModel();
 
-  constructor(private recipeServices:RecipesService,private router: Router)
+  constructor(private authService: AuthService,private recipeServices:RecipesService,private router: Router)
   {
 
   }
@@ -56,6 +57,12 @@ export class NewRecipesPageComponent implements OnInit {
           },
           error=>{
             console.log("Ocurrio un error al obtener recetas ", error);
+            Swal.fire({
+              title: "Error",
+              text: "Error al guardar receta, inténtelo más tarde",
+              icon: "error",
+            });
+            this.authService.validToken(error);
           }
         );
 
