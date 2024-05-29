@@ -44,7 +44,7 @@ export class RecipesService {
             const pos = ingredient.map((e:any) => e.name).indexOf(recipes[i].ingredients[j].name);
             //console.log(pos);
             if(pos>-1){
-              ingredient[pos].amount+=recipes[i].ingredients[j].amount;
+               ingredient[pos].amount= parseInt(ingredient[pos].amount) + parseInt(recipes[i].ingredients[j].amount);
             }else{
              ingredient.push(recipes[i].ingredients[j]);
             }

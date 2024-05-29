@@ -67,3 +67,13 @@ h3 {
     width: 85% !important;
   }
 }
+
+@media (max-width: 500px) {
+  .container, .form-control, .btn {
+    font-size:0.6rem;
+  }
+  .btn {
+    padding: 5px;
+  }
+
+}

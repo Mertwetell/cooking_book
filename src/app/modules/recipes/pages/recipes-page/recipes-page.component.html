@@ -8,12 +8,12 @@
     <span class="visually-hidden">Cargando..</span>
   </div>
 
-  <div *ngIf="!isLoading && filteredRecipes.length == 0" class="mb-5">
+  <div *ngIf="!isLoading && filteredRecipes.length == 0 && recipesList.length >= 1" class="mb-5">
     <p>Ningún elemento coincide con el criterio de búsqueda.</p>
   </div>
 
   <div class="d-flex flex-wrap justify-content-center">
-    <div *ngIf="!isLoading && filteredRecipes.length == recipesList.length" [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 16rem; height: 20rem;">
+    <div *ngIf="!isLoading && filteredRecipes.length == recipesList.length" class="card card-add m-3 equal-height" style="width: 16rem; height: 20rem;">
       <div class="card-body m-3 d-flex align-items-center justify-content-center">
         <a routerLink="/recipes/new">
           <i class="bi bi-plus-circle icon-overlay"></i>

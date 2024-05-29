@@ -1,6 +1,3 @@
-.card-add-recipes {
-  height: 50vh;
-}
 .icon-overlay {
   transform: translate(-50%, -50%);
   font-size: 8rem;
@@ -33,3 +30,20 @@
 .form-control{
   cursor:text;
 }
+.card-add {
+  text-shadow: none !important;
+  border-color: rgb(193, 191, 191);
+}
+
+
+@media (max-width: 767px) {
+  .card-add {
+    height: 10rem !important;
+  }
+  .icon-overlay {
+    font-size: 4rem !important;
+  }
+
+}
+
+

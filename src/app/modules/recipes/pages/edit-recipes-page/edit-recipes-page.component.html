@@ -15,7 +15,7 @@
               <div class="d-flex justify-content-between mb-3">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="isEdit" (change)="toggleEdit($event)">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Editar</label>
+                  <label class="form-check-label me-2" for="flexSwitchCheckDefault">Editar</label>
                 </div>
                 <div>
                   <button type="submit" [disabled]="(recipForm.invalid || !isEdit)" class="btn login-btn button me-3">Guardar</button>
