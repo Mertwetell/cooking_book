@@ -46,6 +46,12 @@ width: 55% !important;
 .table th {
   vertical-align: middle;
 }
+.form-control {
+  cursor: text;
+}
+.button-none {
+  display: none;
+}
 
 @media (max-width: 1100px) {
 .edit-container-right, .edit-container-left {

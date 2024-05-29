@@ -36,15 +36,15 @@
                 <tr  [formGroupName]="ind" *ngFor="let ingr of recipeContex.fIngredients.controls;index as ind" >
                     <th scope="row">{{ind+1}}</th>
                   <td>
-                      <input type="text" formControlName="name"  class="form-control" placeholder="" >
+                      <input type="text" formControlName="name"  class="form-control text-center" placeholder="" >
 
                   </td>
                   <td>
-                    <input type="number" formControlName="amount"  class="form-control" placeholder=""  >
+                    <input type="number" formControlName="amount"  class="form-control text-center" placeholder=""  >
 
                   </td>
                   <td>
-                      <button type="button" class="btn button button-delete"  (click)="recipeContex.removeIngredient(ind)"><i  class="bi bi-trash3" ></i></button>
+                      <button type="button" class="btn button button-delete" [ngClass]="{'button-none' :!ind}" (click)="recipeContex.removeIngredient(ind)"><i  class="bi bi-trash3" ></i></button>
                   </td>
 
                 </tr>
@@ -56,7 +56,7 @@
             </p>
           </div>
          <!-- {{recipeContex.formRecipe.valid}}-->
-          <div class="mt-5 d-flex justify-content-end">
+          <div class="mt-4 d-flex justify-content-end">
               <button type="submit" [disabled]="(recipeContex.formRecipe.invalid || recipeContex.formRecipe.untouched)" class="btn login-btn button me-3">Guardar</button>
               <button type="submit" (click)="cancel()" class="btn btn-light">Cancelar</button>
           </div>

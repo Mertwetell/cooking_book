@@ -7,7 +7,7 @@
   <div *ngIf="!isLoading" class="edit-container d-flex justify-content-evenly">
     <div class="d-flex flex-column edit-container-right justify-content-start">
       <h3 class="text-center recipe-name">{{currentRecipe.name}}</h3>
-      <img [src]="currentRecipe.imagePath" class="rounded recipe-img" [ngClass]="{'img-none':!currentRecipe.imagePath}" alt="recipe-img" >
+      <img appImgBroken [src]="currentRecipe.imagePath" class="rounded-4 recipe-img" [ngClass]="{'img-none':!currentRecipe.imagePath}" alt="recipe-img" >
     </div>
     <div class="edit-container-left">
       <form (ngSubmit)="saveRecipe()" #recipForm="ngForm" >
@@ -54,7 +54,7 @@
                     <th scope="row">{{ind+1}}</th>
                     <td>
                         <!--<ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">-->
-                            <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control" placeholder="" maxlength="50" required >
+                            <input type="text" name="currentRecipe.ingredients[{{ind}}].name" [(ngModel)]="ingr.name" class="form-control text-center" placeholder="" maxlength="50" required >
                         <!--</ng-template>
                         <ng-template [ngIf]="ingr.edit!=true || ingr.delete==true">
                             {{ingr.name}}
@@ -62,7 +62,7 @@
                     </td>
                     <td>
                         <!--<ng-template [ngIf]="ingr.edit==true && ingr.delete!=true">-->
-                            <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control" placeholder="" max="99" min="1" required >
+                            <input type="number" name="currentRecipe.ingredients[{{ind}}].amount" [(ngModel)]="ingr.amount" class="form-control text-center" placeholder="" max="99" min="1" required >
                         <!--</ng-template>
                         <ng-template [ngIf]="ingr.edit!=true">
                             {{ingr.amount}}
@@ -70,7 +70,7 @@
                     </td>
                     <td><!--[disabled]="recipForm.invalid"<button type="button" class="btn button button-edit me-2" (click)="ingr.edit=!ingr.edit" *ngIf="ingr.delete!=true" [disabled]="recipForm.invalid"><i class="bi bi-pencil"></i></button>
                         <button type="button" class="btn button button-delete" (click)="ingr.delete=!ingr.delete"><i [ngClass]="{'bi bi-trash3':!ingr.delete,'uil uil-redo':ingr.delete }"></i></button>-->
-                        <button type="button" class="btn button button-delete" (click)="deleteRowIngredient(ind)"  ><i class="bi bi-trash3"></i></button>
+                        <button type="button" class="btn button button-delete" [ngClass]="{'button-none' :!ind}" (click)="deleteRowIngredient(ind)"  ><i class="bi bi-trash3"></i></button>
                     </td>
                   </tr>
                 </tbody>

@@ -3,7 +3,7 @@
       <a href="javascript:void(0)" class="icon-overlay">
         <i [ngClass]="{ 'bi-suit-heart-fill': isFavorite(), 'bi-suit-heart': !isFavorite() }" (click)="toggleFavorite()"></i>
       </a>
-      <a routerLink="/recipes/edit/{{recipe._id}}"><img src="{{recipe.imagePath}}" class="card-img w-100 h-100 object-fit-cover" alt="Recipe Image" ></a>
+      <a routerLink="/recipes/edit/{{recipe._id}}"><img appImgBroken src="{{recipe.imagePath}}" class="card-img w-100 h-100 object-fit-cover" alt="Recipe Image" ></a>
     </div>
     <div class="card-body pb-0" style="width: 16rem; height: 4rem;">
       <h5 class="card-title clamp-2-lines" style="height: 3rem;">{{recipe.name}}</h5>

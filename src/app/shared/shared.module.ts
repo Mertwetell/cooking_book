@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 import { RecipeInputsComponent } from './components/recipe-inputs/recipe-inputs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImgBrokenDirective } from './directives/img-broken.directive';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     NavBarComponent,
     RecipeCardComponent,
-    RecipeInputsComponent
+    RecipeInputsComponent,
+    ImgBrokenDirective
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     NavBarComponent,
     RecipeCardComponent,
-    RecipeInputsComponent
+    RecipeInputsComponent,
+    ImgBrokenDirective
   ]
 })
 export class SharedModule { }
