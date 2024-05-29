@@ -67,7 +67,7 @@ export class RecipesPageComponent implements OnInit {
           text: "Error al borrar receta, inténtelo más tarde",
           icon: "error",
         });
-        //this.authService.validToken(error);
+        this.authService.validToken(error);
       }
     );
 
