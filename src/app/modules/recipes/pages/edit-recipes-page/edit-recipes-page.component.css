@@ -69,7 +69,7 @@ h3 {
 }
 
 @media (max-width: 500px) {
-  .container, .form-control, .btn {
+  .container, .form-control, .btn, .text-error {
     font-size:0.6rem;
   }
   .btn {

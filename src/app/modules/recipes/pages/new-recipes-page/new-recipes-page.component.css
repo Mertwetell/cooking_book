@@ -64,3 +64,13 @@ width: 55% !important;
   width: 85% !important;
 }
 }
+
+@media (max-width: 500px) {
+  .edit-container, .form-control, .btn, .text-error {
+    font-size:0.6rem;
+  }
+  .btn {
+    padding: 5px;
+  }
+
+}

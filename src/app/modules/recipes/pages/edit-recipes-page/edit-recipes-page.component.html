@@ -25,18 +25,6 @@
         </div>
         <fieldset [disabled]="!isEdit">
           <!-- <app-recipe-inputs [recipe]="currentRecipe"></app-recipe-inputs> -->
-          <div class="mb-3">
-            <label for="name" class="form-label">(*) Nombre:</label>
-            <textarea type="text" name="name" class="form-control" [(ngModel)]="currentRecipe.name" placeholder="" required maxlength="100"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">(*) Descripción:</label>
-            <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="imagePath" class="form-label">(*) Imagen:</label>
-            <textarea type="text" name="imagePath" [(ngModel)]="currentRecipe.imagePath"  class="form-control" placeholder="" required maxlength="500"></textarea>
-          </div>
           <label for="description" class="form-label">(*) Ingredientes:</label>
           <div class="mb-3">
             <table class="table table-dark text-center">
@@ -79,6 +67,19 @@
                 (*) Todos los campos son obligatorios.
               </p>
           </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">(*) Nombre:</label>
+            <textarea type="text" name="name" class="form-control" [(ngModel)]="currentRecipe.name" placeholder="" required maxlength="100"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">(*) Descripción:</label>
+            <textarea class="form-control" aria-label="description" name="description" [(ngModel)]="currentRecipe.description" required maxlength="500"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="imagePath" class="form-label">(*) Imagen:</label>
+            <textarea type="text" name="imagePath" [(ngModel)]="currentRecipe.imagePath"  class="form-control" placeholder="" required maxlength="500"></textarea>
+          </div>
+
         </fieldset>
         <!--<div>{{recipForm.untouched}}</div>
         <div>{{recipForm.invalid}}</div>
