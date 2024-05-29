@@ -26,12 +26,17 @@ export class NewRecipesPageComponent implements OnInit {
   }
 
 //-------------------
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
 
   addRecipe(){
 
     let newRecipe:RecipeModel= this.recipeContex.getRecipeModel();
 
-    console.log(newRecipe);
+    newRecipe.name = this.capitalizeFirstLetter(newRecipe.name);
+    newRecipe.description = this.capitalizeFirstLetter(newRecipe.description);
 
     Swal.fire({
       title: "¿Desea guardar los cambios?",
@@ -61,15 +66,10 @@ export class NewRecipesPageComponent implements OnInit {
       }
     });
 
-   /* this.recipeServices.addRecipe(newRecipe).subscribe(
-      (response:any[])=>{
 
-        console.log("obreniendo recipes ",response);
-        this.router.navigate(['/', 'recipes']);
-      },
-      error=>{
-        console.log("Ocurrio un error al obtener recetas ", error);
-      }
-    );*/
+  }
+
+  cancel(){
+    this.router.navigate(['/', 'recipes']);
   }
 }

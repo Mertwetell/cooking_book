@@ -39,6 +39,13 @@ row-gap: 2rem;
 .edit-container-right, .edit-container-left {
 width: 55% !important;
 }
+.text-error {
+  color: red;
+  font-size: var(--font-size-2);
+}
+.table th {
+  vertical-align: middle;
+}
 
 @media (max-width: 1100px) {
 .edit-container-right, .edit-container-left {

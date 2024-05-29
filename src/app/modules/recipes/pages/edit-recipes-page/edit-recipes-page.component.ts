@@ -29,8 +29,8 @@ export class EditRecipesPageComponent implements OnInit {
     }catch(error){
       this.isEdit=false;
     }
-    
-    
+
+
     await this.getRecipe();
     this.isLoading = false;
   }
@@ -51,8 +51,6 @@ export class EditRecipesPageComponent implements OnInit {
     this.currentRecipe.ingredients.push({ name:"",amount:1 });
   }
 
-  /*editRowIngredient(){
-  }*/
 
   deleteRowIngredient(index:number){
     this.currentRecipe.ingredients.splice(index,1);
@@ -68,17 +66,15 @@ export class EditRecipesPageComponent implements OnInit {
     }
   }
 
-  // async getRecipes() {
-  //   try {
-  //     this.recipesList = await this.recipeServices.getAllRecipes().toPromise();
-  //   } catch (error) {
-  //     console.error('Error obteniendo recetas:', error);
-  //   }
-  // }
+  capitalizeFirstLetter(text: string): string {
+    if (!text) return text;
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  }
 
   saveRecipe(){
+    this.currentRecipe.name = this.capitalizeFirstLetter(this.currentRecipe.name);
+    this.currentRecipe.description = this.capitalizeFirstLetter(this.currentRecipe.description);
 
-    
     Swal.fire({
       title: "¿Desea guardar los cambios?",
       showDenyButton: true,
@@ -106,6 +102,10 @@ export class EditRecipesPageComponent implements OnInit {
     });
 
 
+  }
+
+  cancel(){
+    this.router.navigate(['/', 'recipes']);
   }
 
 }

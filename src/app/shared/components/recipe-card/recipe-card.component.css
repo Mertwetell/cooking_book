@@ -25,6 +25,9 @@
 .card-img {
   cursor: pointer;
 }
+.card-body {
+  vertical-align: center;
+}
 .clamp-2-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;

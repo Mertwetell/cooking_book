@@ -1,7 +1,9 @@
 <h3 class="text-center">LISTA DE FAVORITOS</h3>
 
-<div *ngIf="isLoading" class="spinner-border" role="status">
-  <span class="visually-hidden">Cargando...</span>
+<div *ngIf="isLoading" class="d-flex justify-content-center align-items-center mt-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
 </div>
 
 <div *ngIf="!isLoading && favoritesRecipes.length == 0" class="my-5 text-center">

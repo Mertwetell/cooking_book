@@ -22,9 +22,10 @@ export class FavoritesRecipesPageComponent implements OnInit {
   private async loadFavoriteRecipes() {
     this.isLoading = true;
     try {
-      this.favoritesRecipes = await this.favoritesService.getFavorites();
+      this.favoritesRecipes = await this.favoritesService.loadFavorites();
       this.isLoading = false;
     } catch (error) {
+        this.isLoading = false;
         Swal.fire({
           title: "Error",
           text: "Error al obtener ingredientes, inténtelo más tarde",

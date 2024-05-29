@@ -26,6 +26,10 @@ button {
     font-family: var(--font-family-1);
 }
 
+.btn-light {
+  border: none;
+}
+
 button:disabled {
     opacity: .5;
 }

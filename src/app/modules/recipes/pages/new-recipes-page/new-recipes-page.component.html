@@ -1,38 +1,26 @@
-<!-- <div class="container" style="width: 50%">
-  <form (ngSubmit)="addRecipe()">
-    <app-recipe-inputs [recipe]="newRecipe"></app-recipe-inputs>
-    <label for="description" class="form-label">Ingredientes:</label>
-    <button type="submit" [disabled]="(formNewRecipe.invalid)" class="btn login-btn button">Guardar</button>
-  </form>
-</div>
-<div>
-  {{newRecipe | json}}
-</div> -->
-
 <div class="edit-container d-flex justify-content-evenly">
   <div class="d-flex flex-column edit-container-right justify-content-start">
     <h3 class="text-center recipe-name">Nueva Receta</h3>
-    <!-- <img [src]="recipeContex.formRecipe.value.imagePath" class="rounded recipe-img" alt="recipe-img"> -->
   </div>
   <div class="edit-container-left">
       <form [formGroup]="recipeContex.formRecipe"  (ngSubmit)="addRecipe()" >
 
           <div class="mb-3">
-            <label for="name" class="form-label">Nombre:</label>
+            <label for="name" class="form-label">(*) Nombre:</label>
             <input type="text"  class="form-control" formControlName="name"  placeholder=""  >
 
           </div>
           <div class="mb-3">
-            <label for="description" class="form-label">Descripción:</label>
+            <label for="description" class="form-label">(*) Descripción:</label>
             <textarea class="form-control" aria-label="description" formControlName="description"   ></textarea>
 
           </div>
           <div class="mb-3">
-            <label for="imagePath" class="form-label">Imagen:</label>
+            <label for="imagePath" class="form-label">(*) Imagen:</label>
             <input type="text"  formControlName="imagePath"  class="form-control" placeholder="" >
 
           </div>
-          <label class="form-label">Ingredientes:</label>
+          <label class="form-label">(*) Ingredientes:</label>
           <div class="mb-3">
             <table class="table table-dark text-center">
               <thead>
@@ -63,11 +51,15 @@
 
               </tbody>
             </table>
+            <p class="text-error" *ngIf="recipeContex.formRecipe.invalid">
+              (*) Todos los campos son obligatorios.
+            </p>
           </div>
          <!-- {{recipeContex.formRecipe.valid}}-->
-
-              <button type="submit" [disabled]="(recipeContex.formRecipe.invalid || recipeContex.formRecipe.untouched)" class="btn login-btn button  mt-3">Guardar</button>
-
+          <div class="mt-5 d-flex justify-content-end">
+              <button type="submit" [disabled]="(recipeContex.formRecipe.invalid || recipeContex.formRecipe.untouched)" class="btn login-btn button me-3">Guardar</button>
+              <button type="submit" (click)="cancel()" class="btn btn-light">Cancelar</button>
+          </div>
            <!-- </fieldset> ||(currentFormRecipe.valid && ingredientIsValid())-->
             <!--<div>
               {{currentFormRecipe.invalid || currentFormRecipe.untouched}}

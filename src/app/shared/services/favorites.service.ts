@@ -13,10 +13,6 @@ export class FavoritesService {
     this.loadFavorites();
   }
 
-  getFavorites(): RecipeModel[] {
-    return this.favoritesRecipes;
-  }
-
   addFavorite(recipe: RecipeModel): void {
     if (!this.favoritesRecipes.some(fav => fav._id === recipe._id)) {
       this.favoritesRecipes.push(recipe);
@@ -33,7 +29,7 @@ export class FavoritesService {
     this.saveFavorites();
   }
 
-  async loadFavorites(): Promise<void> {
+  async loadFavorites(): Promise<RecipeModel[]> {
     const savedFavorites = localStorage.getItem('favoritesRecipes');
 
     if (savedFavorites) {
@@ -44,9 +40,13 @@ export class FavoritesService {
       });
       const results = await Promise.all(existencePromises);
 
-      this.favoritesRecipes = results.filter(fav => fav !== null) as RecipeModel[];
+      const validFavorites = results.filter(fav => fav !== null) as RecipeModel[];
+      this.favoritesRecipes = validFavorites;
       this.saveFavorites();
+      return validFavorites;
     }
+
+    return [];
   }
 
   private async recipeExists(id: string): Promise<boolean> {

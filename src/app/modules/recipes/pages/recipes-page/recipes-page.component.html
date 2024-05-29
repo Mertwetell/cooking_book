@@ -1,7 +1,7 @@
 <div class="container px-0 my-5 text-center d-flex flex-column align-items-center">
   <h3>LISTA DE RECETAS</h3>
   <div class="m-3">
-    <input type="text" [(ngModel)]="searchTerm" (input)="filterRecipes()" placeholder="Buscar receta por nombre" class="form-control" style="width: 18rem;">
+    <input type="text" [(ngModel)]="searchTerm" (input)="filterRecipes()" placeholder="Buscar receta por nombre" class="form-control" style="width: 16rem;">
   </div>
 
   <div *ngIf="isLoading" class="spinner-border mt-5" role="status">
@@ -13,7 +13,7 @@
   </div>
 
   <div class="d-flex flex-wrap justify-content-center">
-    <div *ngIf="!isLoading && filteredRecipes.length == recipesList.length" [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 18rem; height: 25rem;">
+    <div *ngIf="!isLoading && filteredRecipes.length == recipesList.length" [ngClass]="{'card-add-recipes': !recipesList.length}" class="card m-3 equal-height" style="width: 16rem; height: 20rem;">
       <div class="card-body m-3 d-flex align-items-center justify-content-center">
         <a routerLink="/recipes/new">
           <i class="bi bi-plus-circle icon-overlay"></i>
