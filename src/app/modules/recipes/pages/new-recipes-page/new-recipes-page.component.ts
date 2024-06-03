@@ -35,6 +35,17 @@ export class NewRecipesPageComponent implements OnInit {
   addRecipe(){
 
     let newRecipe:RecipeModel= this.recipeContex.getRecipeModel();
+    if(this.repeatIngredient(newRecipe.ingredients)){
+     
+      Swal.fire({
+        title: "Error",
+        text: "Error al guardar receta, contiene ingredientes repetidos",
+        icon: "error",
+      });
+
+      return;
+    }
+
 
     newRecipe.name = this.capitalizeFirstLetter(newRecipe.name);
     newRecipe.description = this.capitalizeFirstLetter(newRecipe.description);
@@ -79,4 +90,15 @@ export class NewRecipesPageComponent implements OnInit {
   cancel(){
     this.router.navigate(['/', 'recipes']);
   }
+
+ //------------------------
+ repeatIngredient(ingredients:any[]) {
+    
+  let names=ingredients.map(elem=>elem.name.toLowerCase());
+  let elementosUnicos = new Set(names);
+
+  return elementosUnicos.size !== ingredients.length;
+}
+
+
 }

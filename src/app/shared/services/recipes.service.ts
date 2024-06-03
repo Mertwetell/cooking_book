@@ -41,7 +41,7 @@ export class RecipesService {
           //console.log("mojon ingrediente", recipes[i].ingredients.length);
           for (let j = 0; j < recipes[i].ingredients.length; j++) {
 
-            const pos = ingredient.map((e:any) => e.name).indexOf(recipes[i].ingredients[j].name);
+            const pos = ingredient.map((e:any) => e.name.toLowerCase()).indexOf(recipes[i].ingredients[j].name.toLowerCase());
             //console.log(pos);
             if(pos>-1){
                ingredient[pos].amount= parseInt(ingredient[pos].amount) + parseInt(recipes[i].ingredients[j].amount);

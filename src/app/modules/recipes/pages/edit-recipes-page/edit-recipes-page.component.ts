@@ -82,6 +82,16 @@ export class EditRecipesPageComponent implements OnInit {
     this.currentRecipe.name = this.capitalizeFirstLetter(this.currentRecipe.name);
     this.currentRecipe.description = this.capitalizeFirstLetter(this.currentRecipe.description);
 
+     if(this.repeatIngredient(this.currentRecipe.ingredients)){  
+
+      Swal.fire({
+        title: "Error",
+        text: "Error al guardar receta, contiene ingredientes repetidos",
+        icon: "error",
+      });
+      return;
+     }
+
     Swal.fire({
       title: "¿Desea guardar los cambios?",
       showDenyButton: true,
@@ -119,6 +129,14 @@ export class EditRecipesPageComponent implements OnInit {
 
   cancel(){
     this.router.navigate(['/', 'recipes']);
+  }
+  //------------------------
+   repeatIngredient(ingredients:any[]) {
+    
+    let names=ingredients.map(elem=>elem.name.toLowerCase());
+    let elementosUnicos = new Set(names);
+
+    return elementosUnicos.size !== ingredients.length;
   }
 
 }
